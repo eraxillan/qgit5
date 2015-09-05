@@ -417,6 +417,8 @@ bool QGit::writeToFile(SCRef fileName, SCRef data, bool setExecutable) {
 #ifndef Q_OS_WIN32
 	if (setExecutable)
 		chmod(fileName.toLatin1().constData(), 0755);
+#else
+	Q_UNUSED(setExecutable);
 #endif
 	return true;
 }
@@ -435,6 +437,8 @@ bool QGit::writeToFile(SCRef fileName, const QByteArray& data, bool setExecutabl
 #ifndef Q_OS_WIN32
 	if (setExecutable)
 		chmod(fileName.toLatin1().constData(), 0755);
+#else
+	Q_UNUSED(setExecutable);
 #endif
 	return true;
 }

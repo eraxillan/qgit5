@@ -1,8 +1,8 @@
-This is qgit.exe statically linked to Trolltech Qt4.3.3 for Windows Open source edition
+This is qgit.exe statically linked to Digia Qt 4.8.7 for Windows Open source edition
 
 PREREQUISITES
 
-- You need msysgit (http://code.google.com/p/msysgit/) correctly installed
+- You need msysgit (https://git-for-windows.github.io/) correctly installed
 
 
 NOTES
@@ -16,7 +16,7 @@ NOTES
 
 WINDOWS DEVELOPER INFO
 
-This version has been tested with Visual C++ 2008, there is a VC2008
+This version has been tested with Visual C++ Community 2015, there is a VC2015
 solution and a project file for your convenience.
 
 Please note, the FIRST TIME you need to generate a Makefile. To do this

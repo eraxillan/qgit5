@@ -1,14 +1,14 @@
 # Under Windows launch script start_qgit.bat needs the
 # value GIT_EXEC_DIR to be set to the git bin directory
-GIT_EXEC_DIR = "$$(ProgramFiles)\\Git\\bin"
+# NOTE: hardcode paths in the code is a bad solution,
+#       just setup the variable in the appropriate way (e.g. qmake GIT_EXEC_DIR=C:/Git/bin)
+#GIT_EXEC_DIR = "$$(ProgramFiles)\\Git\\bin"
 
-# Under Windows uncomment following line to enable console messages
-#CONFIG += ENABLE_CONSOLE_MSG
+# Enable console messages under Windows OS
+win32: CONFIG += ENABLE_CONSOLE_MSG
 
 # check for Qt >= 4.3.0
 CUR_QT = $$[QT_VERSION]
-
-# WARNING greaterThan is an undocumented function
 !greaterThan(CUR_QT, 4.3) {
 	error("Sorry I need Qt 4.3.0 or later, you seem to have Qt $$CUR_QT instead")
 }
@@ -21,6 +21,7 @@ contains(QMAKE_CC,.*gcc.*) {
 	CONFIG += HAVE_GCC
 }
 
+# NOTE: Qt5 has modular architecture, so widgets were moved to the separate module
 greaterThan( QT_MAJOR_VERSION, 4 ): QT += widgets
 
 # General stuff
@@ -32,20 +33,20 @@ RESOURCES += icons.qrc
 
 # Platform dependent stuff
 win32 {
-    TARGET = qgit
+    TARGET = qgit5
     target.path = $$GIT_EXEC_DIR
     CONFIG += windows embed_manifest_exe
     RC_FILE = app_icon.rc
 }
 
 unix {
-    TARGET = qgit
+    TARGET = qgit5
     target.path = $$[QT_INSTALL_BINS]
     CONFIG += x11
 }
 
 macx {
-    TARGET = qgit
+    TARGET = qgit5
     target.path = ~/bin
     #CONFIG += x86 ppc
     RC_FILE = resources/qgit.icns
