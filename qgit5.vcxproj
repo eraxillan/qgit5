@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F5602819-070B-3C20-B074-B21C272A5976}</ProjectGuid>
+    <RootNamespace>qgit5</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <ProjectName>qgit5</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>..\build\</IntermediateDirectory>
+    <PrimaryOutput>qgit5</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>..\build\</IntermediateDirectory>
+    <PrimaryOutput>qgit5</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">qgit5</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">qgit5</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\src;..\..\..\Qt\5.5\msvc2013\include;..\..\..\Qt\5.5\msvc2013\include\QtWidgets;..\..\..\Qt\5.5\msvc2013\include\QtGui;..\..\..\Qt\5.5\msvc2013\include\QtANGLE;..\..\..\Qt\5.5\msvc2013\include\QtCore;..\build;..\build;..\..\..\Qt\5.5\msvc2013\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\build\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>..\build\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.5\msvc2013\lib\qtmain.lib;shell32.lib;C:/Qt/5.5/msvc2013/lib\Qt5Core.lib;C:\Qt\5.5\msvc2013\lib\Qt5Widgets.lib;C:\Qt\5.5\msvc2013\lib\Qt5Gui.lib;C:\Qt\5.5\msvc2013\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013\lib;C:/Qt/5.5/msvc2013/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\qgit5.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\src;..\..\..\Qt\5.5\msvc2013\include;..\..\..\Qt\5.5\msvc2013\include\QtWidgets;..\..\..\Qt\5.5\msvc2013\include\QtGui;..\..\..\Qt\5.5\msvc2013\include\QtANGLE;..\..\..\Qt\5.5\msvc2013\include\QtCore;..\build;..\build;..\..\..\Qt\5.5\msvc2013\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>..\build\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>..\build\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\Qt\5.5\msvc2013\lib\qtmaind.lib;C:\Qt\5.5\msvc2013\lib\Qt5Cored.lib;C:\Qt\5.5\msvc2013\lib\Qt5Widgetsd.lib;C:\Qt\5.5\msvc2013\lib\Qt5Guid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\5.5\msvc2013\lib;C:/Qt/5.5/msvc2013/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\qgit5.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\FileHistory.cc" />
+    <ClCompile Include="src\annotate.cpp" />
+    <ClCompile Include="src\cache.cpp" />
+    <ClCompile Include="src\commitimpl.cpp" />
+    <ClCompile Include="src\common.cpp" />
+    <ClCompile Include="src\consoleimpl.cpp" />
+    <ClCompile Include="src\customactionimpl.cpp" />
+    <ClCompile Include="src\dataloader.cpp" />
+    <ClCompile Include="src\domain.cpp" />
+    <ClCompile Include="src\exceptionmanager.cpp" />
+    <ClCompile Include="src\filecontent.cpp" />
+    <ClCompile Include="src\filelist.cpp" />
+    <ClCompile Include="src\fileview.cpp" />
+    <ClCompile Include="src\git.cpp" />
+    <ClCompile Include="src\lanes.cpp" />
+    <ClCompile Include="src\listview.cpp" />
+    <ClCompile Include="src\mainimpl.cpp" />
+    <ClCompile Include="src\myprocess.cpp" />
+    <ClCompile Include="src\namespace_def.cpp" />
+    <ClCompile Include="src\patchcontent.cpp" />
+    <ClCompile Include="src\patchview.cpp" />
+    <ClCompile Include="src\qgit.cpp" />
+    <ClCompile Include="src\rangeselectimpl.cpp" />
+    <ClCompile Include="src\revdesc.cpp" />
+    <ClCompile Include="src\revsview.cpp" />
+    <ClCompile Include="src\settingsimpl.cpp" />
+    <ClCompile Include="src\smartbrowse.cpp" />
+    <ClCompile Include="src\treeview.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="FileHistory.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FileHistory.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\FileHistory.h -o ..\build\moc_FileHistory.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC FileHistory.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_FileHistory.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FileHistory.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\FileHistory.h -o ..\build\moc_FileHistory.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC $(MSBuildProjectDirectory)\src\FileHistory.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_FileHistory.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="annotate.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">annotate.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\annotate.h -o ..\build\moc_annotate.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC annotate.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_annotate.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">annotate.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\annotate.h -o ..\build\moc_annotate.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC annotate.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_annotate.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="cache.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cache.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\cache.h -o ..\build\moc_cache.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC cache.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_cache.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cache.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\cache.h -o ..\build\moc_cache.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC cache.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_cache.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="commitimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">commitimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\commitimpl.h -o ..\build\moc_commitimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC commitimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_commitimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">commitimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\commitimpl.h -o ..\build\moc_commitimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC commitimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_commitimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="common.h" />
+    <ClInclude Include="config.h" />
+    <CustomBuild Include="consoleimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">consoleimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\consoleimpl.h -o ..\build\moc_consoleimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC consoleimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_consoleimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">consoleimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\consoleimpl.h -o ..\build\moc_consoleimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC consoleimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_consoleimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="customactionimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">customactionimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\customactionimpl.h -o ..\build\moc_customactionimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC customactionimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_customactionimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">customactionimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\customactionimpl.h -o ..\build\moc_customactionimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC customactionimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_customactionimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="dataloader.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">dataloader.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\dataloader.h -o ..\build\moc_dataloader.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC dataloader.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_dataloader.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">dataloader.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\dataloader.h -o ..\build\moc_dataloader.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC dataloader.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_dataloader.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="domain.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">domain.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\domain.h -o ..\build\moc_domain.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC domain.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_domain.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">domain.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\domain.h -o ..\build\moc_domain.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC domain.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_domain.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="exceptionmanager.h" />
+    <CustomBuild Include="filecontent.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">filecontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\filecontent.h -o ..\build\moc_filecontent.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC filecontent.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_filecontent.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">filecontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\filecontent.h -o ..\build\moc_filecontent.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC filecontent.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_filecontent.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="filelist.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">filelist.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\filelist.h -o ..\build\moc_filelist.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC filelist.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_filelist.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">filelist.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\filelist.h -o ..\build\moc_filelist.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC filelist.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_filelist.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="fileview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fileview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\fileview.h -o ..\build\moc_fileview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC fileview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_fileview.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fileview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\fileview.h -o ..\build\moc_fileview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC fileview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_fileview.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="git.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">git.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\git.h -o ..\build\moc_git.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC git.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_git.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">git.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\git.h -o ..\build\moc_git.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC git.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_git.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="help.h" />
+    <ClInclude Include="lanes.h" />
+    <CustomBuild Include="listview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">listview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\listview.h -o ..\build\moc_listview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC listview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_listview.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">listview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\listview.h -o ..\build\moc_listview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC listview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_listview.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mainimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mainimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\mainimpl.h -o ..\build\moc_mainimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC mainimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_mainimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mainimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\mainimpl.h -o ..\build\moc_mainimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC mainimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_mainimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="myprocess.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">myprocess.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\myprocess.h -o ..\build\moc_myprocess.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC myprocess.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_myprocess.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">myprocess.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\myprocess.h -o ..\build\moc_myprocess.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC myprocess.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_myprocess.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="patchcontent.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\patchcontent.h -o ..\build\moc_patchcontent.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC patchcontent.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_patchcontent.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\patchcontent.h -o ..\build\moc_patchcontent.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC patchcontent.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_patchcontent.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="patchview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">patchview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\patchview.h -o ..\build\moc_patchview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC patchview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_patchview.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">patchview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\patchview.h -o ..\build\moc_patchview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC patchview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_patchview.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="rangeselectimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">rangeselectimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\rangeselectimpl.h -o ..\build\moc_rangeselectimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC rangeselectimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_rangeselectimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">rangeselectimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\rangeselectimpl.h -o ..\build\moc_rangeselectimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC rangeselectimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_rangeselectimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="revdesc.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">revdesc.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\revdesc.h -o ..\build\moc_revdesc.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC revdesc.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_revdesc.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">revdesc.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\revdesc.h -o ..\build\moc_revdesc.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC revdesc.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_revdesc.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="revsview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">revsview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\revsview.h -o ..\build\moc_revsview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC revsview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_revsview.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">revsview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\revsview.h -o ..\build\moc_revsview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC revsview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_revsview.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="settingsimpl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">settingsimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\settingsimpl.h -o ..\build\moc_settingsimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC settingsimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_settingsimpl.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">settingsimpl.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\settingsimpl.h -o ..\build\moc_settingsimpl.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC settingsimpl.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_settingsimpl.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="smartbrowse.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">smartbrowse.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\smartbrowse.h -o ..\build\moc_smartbrowse.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC smartbrowse.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_smartbrowse.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">smartbrowse.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\smartbrowse.h -o ..\build\moc_smartbrowse.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC smartbrowse.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_smartbrowse.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="treeview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">treeview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\treeview.h -o ..\build\moc_treeview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC treeview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\moc_treeview.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">treeview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1800 -D_WIN32 -IC:/Qt/5.5/msvc2013/mkspecs/win32-msvc2013 -IC:/Projects/redivivus/src -IC:/Projects/redivivus/src -IC:/Qt/5.5/msvc2013/include -IC:/Qt/5.5/msvc2013/include/QtWidgets -IC:/Qt/5.5/msvc2013/include/QtGui -IC:/Qt/5.5/msvc2013/include/QtANGLE -IC:/Qt/5.5/msvc2013/include/QtCore src\treeview.h -o ..\build\moc_treeview.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC treeview.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\moc_treeview.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\build\moc_FileHistory.cpp" />
+    <ClCompile Include="..\build\moc_annotate.cpp" />
+    <ClCompile Include="..\build\moc_cache.cpp" />
+    <ClCompile Include="..\build\moc_commitimpl.cpp" />
+    <ClCompile Include="..\build\moc_consoleimpl.cpp" />
+    <ClCompile Include="..\build\moc_customactionimpl.cpp" />
+    <ClCompile Include="..\build\moc_dataloader.cpp" />
+    <ClCompile Include="..\build\moc_domain.cpp" />
+    <ClCompile Include="..\build\moc_filecontent.cpp" />
+    <ClCompile Include="..\build\moc_filelist.cpp" />
+    <ClCompile Include="..\build\moc_fileview.cpp" />
+    <ClCompile Include="..\build\moc_git.cpp" />
+    <ClCompile Include="..\build\moc_listview.cpp" />
+    <ClCompile Include="..\build\moc_mainimpl.cpp" />
+    <ClCompile Include="..\build\moc_myprocess.cpp" />
+    <ClCompile Include="..\build\moc_patchcontent.cpp" />
+    <ClCompile Include="..\build\moc_patchview.cpp" />
+    <ClCompile Include="..\build\moc_rangeselectimpl.cpp" />
+    <ClCompile Include="..\build\moc_revdesc.cpp" />
+    <ClCompile Include="..\build\moc_revsview.cpp" />
+    <ClCompile Include="..\build\moc_settingsimpl.cpp" />
+    <ClCompile Include="..\build\moc_smartbrowse.cpp" />
+    <ClCompile Include="..\build\moc_treeview.cpp" />
+    <ClCompile Include="..\build\qrc_icons.cpp" />
+    <ClInclude Include="..\build\ui_commit.h" />
+    <ClInclude Include="..\build\ui_console.h" />
+    <ClInclude Include="..\build\ui_customaction.h" />
+    <ClInclude Include="..\build\ui_fileview.h" />
+    <ClInclude Include="..\build\ui_help.h" />
+    <ClInclude Include="..\build\ui_mainview.h" />
+    <ClInclude Include="..\build\ui_patchview.h" />
+    <ClInclude Include="..\build\ui_rangeselect.h" />
+    <ClInclude Include="..\build\ui_revsview.h" />
+    <ClInclude Include="..\build\ui_settings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="commit.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">commit.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\commit.ui -o ..\build\ui_commit.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC commit.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_commit.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">commit.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\commit.ui -o ..\build\ui_commit.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC commit.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_commit.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="console.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">console.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\console.ui -o ..\build\ui_console.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC console.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_console.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">console.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\console.ui -o ..\build\ui_console.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC console.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_console.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="customaction.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">customaction.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\customaction.ui -o ..\build\ui_customaction.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC customaction.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_customaction.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">customaction.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\customaction.ui -o ..\build\ui_customaction.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC customaction.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_customaction.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="fileview.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">fileview.ui;listview.h;filecontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\fileview.ui -o ..\build\ui_fileview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC fileview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_fileview.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">fileview.ui;listview.h;filecontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\fileview.ui -o ..\build\ui_fileview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC fileview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_fileview.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="help.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">help.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\help.ui -o ..\build\ui_help.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC help.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_help.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">help.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\help.ui -o ..\build\ui_help.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC help.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_help.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mainview.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mainview.ui;treeview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\mainview.ui -o ..\build\ui_mainview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC mainview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_mainview.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mainview.ui;treeview.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\mainview.ui -o ..\build\ui_mainview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC mainview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_mainview.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="patchview.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">patchview.ui;revdesc.h;filelist.h;patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\patchview.ui -o ..\build\ui_patchview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC patchview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_patchview.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">patchview.ui;revdesc.h;filelist.h;patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\patchview.ui -o ..\build\ui_patchview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC patchview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_patchview.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="rangeselect.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">rangeselect.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\rangeselect.ui -o ..\build\ui_rangeselect.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC rangeselect.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_rangeselect.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">rangeselect.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\rangeselect.ui -o ..\build\ui_rangeselect.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC rangeselect.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_rangeselect.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="revsview.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">revsview.ui;revdesc.h;listview.h;filelist.h;patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\revsview.ui -o ..\build\ui_revsview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC revsview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_revsview.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">revsview.ui;revdesc.h;listview.h;filelist.h;patchcontent.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\revsview.ui -o ..\build\ui_revsview.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC revsview.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_revsview.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="settings.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">settings.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\settings.ui -o ..\build\ui_settings.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC settings.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\ui_settings.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">settings.ui;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\uic.exe src\settings.ui -o ..\build\ui_settings.h
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC settings.ui</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\ui_settings.h;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\1downarrow.png" />
+    <None Include="resources\1uparrow.png" />
+    <None Include="resources\bookmark.png" />
+    <None Include="resources\bookmark_add.png" />
+    <None Include="resources\cancel.png" />
+    <None Include="resources\colorize.png" />
+    <None Include="resources\configure.png" />
+    <None Include="resources\editcopy.png" />
+    <None Include="resources\encrypted.png" />
+    <None Include="resources\filter.png" />
+    <None Include="resources\find.png" />
+    <None Include="resources\folder.png" />
+    <None Include="resources\folder_open.png" />
+    <None Include="resources\help.png" />
+    <None Include="resources\html.png" />
+    <None Include="resources\image.png" />
+    <None Include="resources\mail_get.png" />
+    <None Include="resources\mail_send.png" />
+    <None Include="resources\minusonly.png" />
+    <None Include="resources\misc.png" />
+    <None Include="resources\next.png" />
+    <None Include="resources\ok.png" />
+    <None Include="resources\openterm.png" />
+    <None Include="resources\pencil.png" />
+    <None Include="resources\plusminus.png" />
+    <None Include="resources\plusonly.png" />
+    <None Include="resources\previous.png" />
+    <None Include="resources\qgit.png" />
+    <None Include="resources\range_select.png" />
+    <None Include="resources\reload.png" />
+    <None Include="resources\remove.png" />
+    <None Include="resources\shellscript.png" />
+    <None Include="resources\source_c.png" />
+    <None Include="resources\source_cpp.png" />
+    <None Include="resources\source_h.png" />
+    <None Include="resources\source_java.png" />
+    <None Include="resources\source_pl.png" />
+    <None Include="resources\source_py.png" />
+    <None Include="resources\tab_remove.png" />
+    <None Include="resources\tar.png" />
+    <None Include="resources\txt.png" />
+    <None Include="resources\vcs_commit.png" />
+    <None Include="resources\view_choose.png" />
+    <None Include="resources\view_top_bottom.png" />
+    <None Include="resources\view_tree.png" />
+    <None Include="resources\wizard.png" />
+    <CustomBuild Include="icons.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">icons.qrc;resources\vcs_commit.png;resources\source_java.png;resources\source_c.png;resources\configure.png;resources\txt.png;resources\cancel.png;resources\folder_open.png;resources\qgit.png;resources\source_cpp.png;resources\next.png;resources\source_py.png;resources\wizard.png;resources\openterm.png;resources\editcopy.png;resources\folder.png;resources\plusonly.png;resources\html.png;resources\view_top_bottom.png;resources\mail_send.png;resources\bookmark_add.png;resources\plusminus.png;resources\view_tree.png;resources\remove.png;resources\bookmark.png;resources\reload.png;resources\source_h.png;resources\colorize.png;resources\source_pl.png;resources\1uparrow.png;resources\filter.png;resources\help.png;resources\previous.png;resources\find.png;resources\ok.png;resources\image.png;resources\1downarrow.png;resources\mail_get.png;resources\tar.png;resources\range_select.png;resources\view_choose.png;resources\shellscript.png;resources\encrypted.png;resources\minusonly.png;resources\pencil.png;resources\misc.png;resources\tab_remove.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\rcc.exe -name icons src\icons.qrc -o ..\build\qrc_icons.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC icons.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\build\qrc_icons.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">icons.qrc;resources\vcs_commit.png;resources\source_java.png;resources\source_c.png;resources\configure.png;resources\txt.png;resources\cancel.png;resources\folder_open.png;resources\qgit.png;resources\source_cpp.png;resources\next.png;resources\source_py.png;resources\wizard.png;resources\openterm.png;resources\editcopy.png;resources\folder.png;resources\plusonly.png;resources\html.png;resources\view_top_bottom.png;resources\mail_send.png;resources\bookmark_add.png;resources\plusminus.png;resources\view_tree.png;resources\remove.png;resources\bookmark.png;resources\reload.png;resources\source_h.png;resources\colorize.png;resources\source_pl.png;resources\1uparrow.png;resources\filter.png;resources\help.png;resources\previous.png;resources\find.png;resources\ok.png;resources\image.png;resources\1downarrow.png;resources\mail_get.png;resources\tar.png;resources\range_select.png;resources\view_choose.png;resources\shellscript.png;resources\encrypted.png;resources\minusonly.png;resources\pencil.png;resources\misc.png;resources\tab_remove.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+if errorlevel 1 goto VCEnd
+C:\Qt\5.5\msvc2013\bin\rcc.exe -name icons src\icons.qrc -o ..\build\qrc_icons.cpp
+if errorlevel 1 goto VCEnd
+endlocal</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC icons.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\build\qrc_icons.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\*" />
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
+    <None Include="..\README_WIN.txt" />
+    <None Include="..\exception_manager.txt" />
+    <None Include="..\qgit_inno_setup.iss" />
+    <None Include="app_icon.rc" />
+    <None Include="helpgen.sh" />
+    <None Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\app_icon.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

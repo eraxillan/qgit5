@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\FileHistory.cc" />
+    <ClCompile Include="src\annotate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cache.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commitimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\consoleimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\customactionimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dataloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exceptionmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filecontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fileview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\git.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lanes.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\listview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mainimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\myprocess.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\namespace_def.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patchcontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patchview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qgit.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rangeselectimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\revdesc.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\revsview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\settingsimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\smartbrowse.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\treeview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="FileHistory.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="annotate.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cache.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="commitimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="consoleimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="customactionimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dataloader.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="domain.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="exceptionmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="filecontent.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="filelist.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fileview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="git.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="help.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lanes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="listview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="myprocess.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="patchcontent.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="patchview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rangeselectimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="revdesc.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="revsview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="settingsimpl.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="smartbrowse.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="treeview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\build\moc_FileHistory.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_annotate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_cache.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_commitimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_consoleimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_customactionimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_dataloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_domain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_filecontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_filelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_fileview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_git.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_listview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_mainimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_myprocess.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_patchcontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_patchview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_rangeselectimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_revdesc.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_revsview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_settingsimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_smartbrowse.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\moc_treeview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build\qrc_icons.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\build\ui_commit.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_console.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_customaction.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_fileview.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_help.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_mainview.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_patchview.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_rangeselect.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_revsview.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\ui_settings.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="commit.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="console.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="customaction.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fileview.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="help.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainview.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="patchview.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rangeselect.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="revsview.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="settings.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\1downarrow.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\1uparrow.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\bookmark.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\bookmark_add.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\cancel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\colorize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\configure.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\editcopy.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\encrypted.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\filter.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\find.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\folder_open.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\html.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="icons.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="resources\image.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\mail_get.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\mail_send.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\minusonly.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\misc.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\next.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\ok.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\openterm.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\pencil.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\plusminus.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\plusonly.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\previous.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\qgit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\range_select.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\reload.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\remove.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\shellscript.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_c.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_cpp.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_java.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_pl.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\source_py.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\tab_remove.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\tar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\txt.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\vcs_commit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\view_choose.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\view_top_bottom.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\view_tree.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\wizard.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\1uparrow.png" />
+    <None Include="resources\bookmark.png" />
+    <None Include="resources\bookmark_add.png" />
+    <None Include="resources\cancel.png" />
+    <None Include="resources\colorize.png" />
+    <None Include="resources\configure.png" />
+    <None Include="resources\editcopy.png" />
+    <None Include="resources\encrypted.png" />
+    <None Include="resources\filter.png" />
+    <None Include="resources\find.png" />
+    <None Include="resources\folder.png" />
+    <None Include="resources\folder_open.png" />
+    <None Include="resources\help.png" />
+    <None Include="resources\html.png" />
+    <None Include="resources\image.png" />
+    <None Include="resources\mail_get.png" />
+    <None Include="resources\mail_send.png" />
+    <None Include="resources\minusonly.png" />
+    <None Include="resources\misc.png" />
+    <None Include="resources\next.png" />
+    <None Include="resources\ok.png" />
+    <None Include="resources\openterm.png" />
+    <None Include="resources\pencil.png" />
+    <None Include="resources\plusminus.png" />
+    <None Include="resources\plusonly.png" />
+    <None Include="resources\previous.png" />
+    <None Include="resources\qgit.png" />
+    <None Include="resources\range_select.png" />
+    <None Include="resources\reload.png" />
+    <None Include="resources\remove.png" />
+    <None Include="resources\shellscript.png" />
+    <None Include="resources\source_c.png" />
+    <None Include="resources\source_cpp.png" />
+    <None Include="resources\source_h.png" />
+    <None Include="resources\source_java.png" />
+    <None Include="resources\source_pl.png" />
+    <None Include="resources\source_py.png" />
+    <None Include="resources\tab_remove.png" />
+    <None Include="resources\tar.png" />
+    <None Include="resources\txt.png" />
+    <None Include="resources\vcs_commit.png" />
+    <None Include="resources\view_choose.png" />
+    <None Include="resources\view_top_bottom.png" />
+    <None Include="resources\view_tree.png" />
+    <None Include="resources\wizard.png" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="resources\*" />
+    <None Include="..\LICENSE" />
+    <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\*">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="..\README_WIN.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="app_icon.rc">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="..\exception_manager.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="helpgen.sh">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="..\qgit_inno_setup.iss">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="todo.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\app_icon.rc" />
+  </ItemGroup>
+</Project>
