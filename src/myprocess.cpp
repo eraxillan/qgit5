@@ -100,7 +100,13 @@ void MyProcess::sendErrorMsg(bool notStarted, SCRef err) {
 	errorDesc.prepend(err);
 
 	if (notStarted)
-		errorDesc = QString::fromAscii("Unable to start the process!");
+    {
+#if QT_VERSION < 0x050000
+        errorDesc = QString::fromAscii("Unable to start the process!");
+#else
+        errorDesc = QString::fromLatin1("Unable to start the process!");
+#endif
+    }
 
 	const QString cmd(arguments.join(" ")); // hide any QUOTE_CHAR or related stuff
 	MainExecErrorEvent* e = new MainExecErrorEvent(cmd, errorDesc);

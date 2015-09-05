@@ -21,6 +21,8 @@ contains(QMAKE_CC,.*gcc.*) {
 	CONFIG += HAVE_GCC
 }
 
+greaterThan( QT_MAJOR_VERSION, 4 ): QT += widgets
+
 # General stuff
 TEMPLATE = app
 CONFIG += qt warn_on exceptions debug_and_release

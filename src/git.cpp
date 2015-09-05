@@ -63,6 +63,9 @@ Git::Git(QObject* p) : QObject(p) {
 	curDomain = NULL;
 	revData = NULL;
 	revsFiles.reserve(MAX_DICT_SIZE);
+
+    // NOTE: git default encoding is UTF-8
+    setTextCodec( QTextCodec::codecForName( "utf8" ) );
 }
 
 void Git::checkEnvironment() {
@@ -145,7 +148,11 @@ const QStringList Git::getGitConfigList(bool global) {
 bool Git::isImageFile(SCRef file) {
 
 	const QString ext(file.section('.', -1).toLower());
-	return QImageReader::supportedImageFormats().contains(ext.toAscii());
+#if QT_VERSION < 0x050000
+        return QImageReader::supportedImageFormats().contains(ext.toAscii());
+#else
+        return QImageReader::supportedImageFormats().contains(ext.toLatin1());
+#endif
 }
 
 //CT TODO investigate if there is a better way of getting this (from git e.g.)
@@ -180,8 +187,9 @@ bool Git::isThrowOnStopRaised(int excpId, SCRef curContext) {
 }
 
 void Git::setTextCodec(QTextCodec* tc) {
-
+#if QT_VERSION < 0x050000
 	QTextCodec::setCodecForCStrings(tc); // works also with tc == 0 (Latin1)
+#endif
 	QTextCodec::setCodecForLocale(tc);
 	QString name(tc ? tc->name() : "Latin1");
 
@@ -973,9 +981,11 @@ const QString Git::getNewCommitMsg() {
 const QString Git::colorMatch(SCRef txt, QRegExp& regExp) {
 
 	QString text;
-
+#if QT_VERSION < 0x050000
 	text = Qt::escape(txt);
-
+#else
+    text = txt.toHtmlEscaped();
+#endif
 	if (regExp.isEmpty())
 		return text;
 
@@ -1037,8 +1047,16 @@ const QString Git::getDesc(SCRef sha, QRegExp& shortLogRE, QRegExp& longLogRE,
 
 		if (showHeader) {
 		    if (c->committer() != c->author())
+#if QT_VERSION < 0x050000
 		        ts << formatList(QStringList(Qt::escape(c->committer())), "Committer");
+#else
+                ts << formatList(QStringList(c->committer().toHtmlEscaped()), "Committer");
+#endif
+#if QT_VERSION < 0x050000
 			ts << formatList(QStringList(Qt::escape(c->author())), "Author");
+#else
+            ts << formatList(QStringList(c->author().toHtmlEscaped()), "Author");
+#endif
 			ts << formatList(QStringList(getLocalDate(c->authorDate())), " Author date");
 
 			if (c->isUnApplied || c->isApplied) {
@@ -1082,8 +1100,11 @@ const QString Git::getDesc(SCRef sha, QRegExp& shortLogRE, QRegExp& longLogRE,
 				slog = r->sha();
 			if (slog.length() > 60)
 				slog = slog.left(57).trimmed().append("...");
-
+#if QT_VERSION < 0x050000
 			slog = Qt::escape(slog);
+#else
+            slog = slog.toHtmlEscaped();
+#endif
 			const QString link("<a href=\"" + r->sha() + "\">" + slog + "</a>");
 			text.replace(pos + 2, ref.length(), link);
 			pos += link.length();
@@ -1636,10 +1657,18 @@ const QStringList Git::getArgs(bool* quit, bool repoChanged) {
 
         QString args;
         if (startup) {
-                for (int i = 1; i < qApp->argc(); i++) {
-                        // in arguments with spaces double quotes
-                        // are stripped by Qt, so re-add them
-                        QString arg(qApp->argv()[i]);
+#if QT_VERSION < 0x050000
+            for (int i = 1; i < qApp->argc(); i++) {
+                // in arguments with spaces double quotes
+                // are stripped by Qt, so re-add them
+                QString arg(qApp->argv()[i]);
+#else
+            QStringList args = QCoreApplication::arguments();
+            for (int i = 1; i < args.size(); i++) {
+                // in arguments with spaces double quotes
+                // are stripped by Qt, so re-add them
+                QString arg(args[i]);
+#endif
                         if (arg.contains(' '))
                                 arg.prepend('\"').append('\"');
 
@@ -1882,12 +1911,21 @@ Rev* Git::fakeRevData(SCRef sha, SCList parents, SCRef author, SCRef date, SCRef
         data.append(author + '\n' + author + '\n' + date + '\n');
         data.append(log + '\n' + longLog);
 
+#if QT_VERSION < 0x050000
         QString header("log size " + QString::number(QByteArray(data.toAscii()).length() - 1) + '\n');
+#else
+        QString header("log size " + QString::number(QByteArray(data.toLatin1()).length() - 1) + '\n');
+#endif
+
         data.prepend(header);
         if (!patch.isEmpty())
                 data.append('\n' + patch);
 
+#if QT_VERSION < 0x050000
         QByteArray* ba = new QByteArray(data.toAscii());
+#else
+        QByteArray* ba = new QByteArray(data.toLatin1());
+#endif
         ba->append('\0');
 
         fh->rowData.append(ba);
@@ -2247,8 +2285,10 @@ bool Git::init(SCRef wd, bool askForRange, const QStringList* passedArgs, bool o
                 if (!passedArgs) {
 
                         // update text codec according to repo settings
+#if QT_VERSION < 0x050000
                         bool dummy;
                         QTextCodec::setCodecForCStrings(getTextCodec(&dummy));
+#endif
 
                         // load references
                         SHOW_MSG(msg1 + "refs...");

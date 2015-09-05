@@ -70,6 +70,9 @@ const QString FileHistory::sha(int row) const {
 }
 
 void FileHistory::flushTail() {
+#if QT_VERSION >= 0x050000
+    beginResetModel();
+#endif
 
   if (earlyOutputCnt < 0 || earlyOutputCnt >= revOrder.count()) {
     dbp("ASSERT in FileHistory::flushTail(), earlyOutputCnt is %1", earlyOutputCnt);
@@ -92,14 +95,25 @@ void FileHistory::flushTail() {
   firstFreeLane = earlyOutputCntBase;
   lns->clear();
   rowCnt = revOrder.count();
+
+#if QT_VERSION < 0x050000
   reset();
+#else
+  endResetModel();
+#endif
 }
 
 void FileHistory::clear(bool complete) {
+#if QT_VERSION >= 0x050000
+    beginResetModel();
+#endif
 
   if (!complete) {
     if (revOrder.count() > 0)
       flushTail();
+#if QT_VERSION >= 0x050000
+    endResetModel();
+#endif
     return;
   }
   git->cancelDataLoading(this);
@@ -124,7 +138,11 @@ void FileHistory::clear(bool complete) {
   }
   rowCnt = revOrder.count();
   annIdValid = false;
+#if QT_VERSION < 0x050000
   reset();
+#else
+  endResetModel();
+#endif
   emit headerDataChanged(Qt::Horizontal, 0, 4);
 }
 
@@ -152,9 +170,18 @@ void FileHistory::on_loadCompleted(const FileHistory* fh, const QString&) {
   if (fh != this || rowCnt >= revOrder.count())
     return;
 
+#if QT_VERSION < 0x050000
+  beginResetModel();
+#endif
+
   // now we can process last revision
   rowCnt = revOrder.count();
-  reset(); // force a reset to avoid artifacts in file history graph under Windows
+  // force a reset to avoid artifacts in file history graph under Windows
+#if QT_VERSION < 0x050000
+  reset();
+#else
+  endResetModel();
+#endif
 
   // adjust Id column width according to the numbers of revisions we have
   if (!git->isMainHistory(this))
@@ -201,7 +228,7 @@ QModelIndex FileHistory::index(int row, int column, const QModelIndex&) const {
   if (row < 0 || row >= rowCnt)
     return QModelIndex();
 
-  return createIndex(row, column, 0);
+  return createIndex(row, column, (void*)0);
 }
 
 QModelIndex FileHistory::parent(const QModelIndex&) const {

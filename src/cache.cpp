@@ -8,6 +8,7 @@
 */
 #include <QFile>
 #include <QDir>
+#include <QDataStream>
 #include "cache.h"
 
 using namespace QGit;

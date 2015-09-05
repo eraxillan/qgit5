@@ -7,20 +7,32 @@
 
 */
 
+#include <QDataStream>
+#include <QTextCodec>
 #include "common.h"
 
 const QString Rev::mid(int start, int len) const {
 
         // warning no sanity check is done on arguments
         const char* data = ba.constData();
+#if QT_VERSION < 0x050000
         return QString::fromAscii(data + start, len);
+#else
+        QTextCodec* codec = QTextCodec::codecForLocale();
+        if( !codec ) {
+            dbp("ASSERT: local codec <%1> not available", 0);
+            return QString();
+        }
+        return codec->toUnicode( data + start, len ).toUtf8();
+#endif
 }
 
 const QString Rev::midSha(int start, int len) const {
 
         // warning no sanity check is done on arguments
         const char* data = ba.constData();
-        return QString::fromLatin1(data + start, len); // faster then formAscii
+        // NOTE: faster then fromAscii, and don't deprecated in Qt5
+        return QString::fromLatin1(data + start, len);
 }
 
 const ShaString Rev::parent(int idx) const {

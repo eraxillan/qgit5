@@ -20,6 +20,7 @@
 #include <QStatusBar>
 #include <QTimer>
 #include <QWheelEvent>
+#include <QMimeData>
 #include "config.h" // defines PACKAGE_VERSION
 #include "consoleimpl.h"
 #include "commitimpl.h"
@@ -946,8 +947,13 @@ void MainImpl::shortCutActivated() {
 		return;
 
 	bool isKey_P = false;
-
+#if QT_VERSION < 0x050000
 	switch (se->key()) {
+#else
+    int keys = 0;
+    for( int i = 0; i < se->key().count(); ++i ) keys |= se->key() [i];
+    switch (keys) {
+#endif
 
 	case Qt::Key_I:
 		rv->tab()->listViewLog->on_keyUp();
@@ -1503,6 +1509,9 @@ void MainImpl::ActSettings_activated() {
 	// update ActCheckWorkDir if necessary
 	if (ActCheckWorkDir->isChecked() != testFlag(DIFF_INDEX_F))
 		ActCheckWorkDir->toggle();
+
+    // NOTE: required to update description text after codec change
+    emit updateRevDesc();
 }
 
 void MainImpl::ActCustomActionSetup_activated() {

@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QPalette>
 #include <QMouseEvent>
+#include <QMimeData>
 #include "git.h"
 #include "domain.h"
 #include "filelist.h"
