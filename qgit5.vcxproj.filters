@@ -139,6 +139,108 @@
     <ClCompile Include="src\treeview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="build64\Release\moc_FileHistory.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_annotate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_cache.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_commitimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_consoleimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_customactionimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_dataloader.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_domain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_filecontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_filelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_fileview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_git.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_listview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_mainimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_myprocess.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_patchcontent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_patchview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_rangeselectimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_revdesc.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_revsview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_settingsimpl.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_smartbrowse.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\moc_treeview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\qrc_icons.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_commit.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_console.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_customaction.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_fileview.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_help.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_mainview.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_patchview.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_revsview.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_settings.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="build64\Release\ui_rangeselect.h">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="FileHistory.h">
@@ -225,110 +327,6 @@
     <CustomBuild Include="treeview.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\build\moc_FileHistory.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_annotate.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_cache.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_commitimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_consoleimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_customactionimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_dataloader.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_domain.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_filecontent.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_filelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_fileview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_git.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_listview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_mainimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_myprocess.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_patchcontent.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_patchview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_rangeselectimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_revdesc.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_revsview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_settingsimpl.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_smartbrowse.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\moc_treeview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\build\qrc_icons.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClInclude Include="..\build\ui_commit.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_console.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_customaction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_fileview.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_help.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_mainview.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_patchview.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_rangeselect.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_revsview.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\build\ui_settings.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="commit.ui">
@@ -595,26 +593,20 @@
     <None Include="resources\*" />
     <None Include="resources\*" />
     <None Include="resources\*" />
-    <None Include="..\LICENSE" />
-    <None Include="..\README.md" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
+    <None Include="README_WIN.txt" />
+    <None Include="exception_manager.txt" />
+    <None Include="qgit_inno_setup.iss" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\*">
       <Filter>Distribution Files</Filter>
     </None>
-    <None Include="..\README_WIN.txt">
-      <Filter>Distribution Files</Filter>
-    </None>
     <None Include="app_icon.rc">
       <Filter>Distribution Files</Filter>
     </None>
-    <None Include="..\exception_manager.txt">
-      <Filter>Distribution Files</Filter>
-    </None>
     <None Include="helpgen.sh">
-      <Filter>Distribution Files</Filter>
-    </None>
-    <None Include="..\qgit_inno_setup.iss">
       <Filter>Distribution Files</Filter>
     </None>
     <None Include="todo.txt">
