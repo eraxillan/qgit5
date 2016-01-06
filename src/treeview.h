@@ -1,17 +1,18 @@
 /*
-	Description: files tree view
+    Description: files tree view
 
-	Author: Marco Costalba (C) 2005-2007
+    Author: Marco Costalba (C) 2005-2007
 
-	Copyright: See COPYING file that comes with this distribution
+    Copyright: See COPYING file that comes with this distribution
 
 */
 #ifndef TREEVIEW_H
 #define TREEVIEW_H
 
-#include <QTreeWidget>
 #include "common.h"
 #include "git.h"
+
+#include <QTreeWidget>
 
 class DirItem;
 class TreeView;
@@ -19,68 +20,73 @@ class Git;
 class StateInfo;
 class Domain;
 
-class FileItem : public QTreeWidgetItem {
+class FileItem : public QTreeWidgetItem
+{
 public:
-	FileItem(FileItem* p, SCRef nm) : QTreeWidgetItem(p, QStringList(nm)) {}
-	FileItem(QTreeWidget* p, SCRef nm) : QTreeWidgetItem(p, QStringList(nm)) {}
+    FileItem( FileItem* p, SCRef nm ) : QTreeWidgetItem( p, QStringList( nm ) ) {}
+    FileItem( QTreeWidget* p, SCRef nm ) : QTreeWidgetItem( p, QStringList( nm ) ) {}
 
-	virtual QString fullName() const;
-	void setBold(bool b);
+    virtual QString fullName() const;
+    void setBold( bool b );
 };
 
-class DirItem : public FileItem {
-public:
-	DirItem(QTreeWidget* parent, SCRef ts, SCRef nm);
-	DirItem(DirItem* parent, SCRef ts, SCRef nm);
-
+class DirItem : public FileItem
+{
 protected:
-	friend class TreeView;
+    friend class TreeView;
 
-	QString treeSha;
+    QString treeSha;
+
+public:
+    DirItem( QTreeWidget* parent, SCRef ts, SCRef nm );
+    DirItem( DirItem* parent, SCRef ts, SCRef nm );
 };
 
-class TreeView : public QTreeWidget {
-Q_OBJECT
-public:
-	TreeView(QWidget* par) : QTreeWidget(par), d(NULL), git(NULL), treeIsValid(false) {}
-	void setup(Domain* d, Git* g);
-	void setTreeName(SCRef treeName) { rootName = treeName; }
-	void updateTree();
-	const QString fullName(QTreeWidgetItem* item);
-	bool isDir(SCRef fileName);
-	bool isModified(SCRef path, bool isDir = false);
-	void clear();
-	void getTreeSelectedItems(QStringList& selectedItems);
-	bool getTree(SCRef tSha, Git::TreeInfo& ti, bool wd, SCRef tPath);
+class TreeView : public QTreeWidget
+{
+    Q_OBJECT
 
-	const QPixmap* folderClosed;
-	const QPixmap* folderOpen;
-	const QPixmap* fileDefault;
+    Domain* d;
+    Git* git;
+    StateInfo* st;
+    QString rootName;
+    QStringList modifiedFiles;  // No need a map, should not be a lot
+    QStringList modifiedDirs;
+    bool ignoreCurrentChanged;
+    bool treeIsValid;
+    bool isWorkingDir;
 
-signals:
-	void updateViews(const QString& newRevSha, const QString& newFileName);
-	void contextMenu(const QString&, int type);
+    void setTree( SCRef treeSha );
+    void setFile( SCRef fileName );
+    void restoreStuff();
 
 protected slots:
-	void on_customContextMenuRequested(const QPoint&);
-	void on_currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
-	void on_itemExpanded(QTreeWidgetItem*);
-	void on_itemCollapsed(QTreeWidgetItem*);
+    void on_customContextMenuRequested( const QPoint& );
+    void on_currentItemChanged( QTreeWidgetItem*, QTreeWidgetItem* );
+    void on_itemExpanded( QTreeWidgetItem* );
+    void on_itemCollapsed( QTreeWidgetItem* );
 
-private:
-	void setTree(SCRef treeSha);
-	void setFile(SCRef fileName);
-	void restoreStuff();
+public:
+    TreeView( QWidget* par ) : QTreeWidget( par ), d( NULL ), git( NULL ), treeIsValid( false ) {}
 
-	Domain* d;
-	Git* git;
-	StateInfo* st;
-	QString rootName;
-	QStringList modifiedFiles; // no need a map, should not be a lot
-	QStringList modifiedDirs;
-	bool ignoreCurrentChanged;
-	bool treeIsValid;
-	bool isWorkingDir;
+    void setup( Domain* d, Git* g );
+    void setTreeName( SCRef treeName ) { rootName = treeName; }
+
+    void updateTree();
+    const QString fullName( QTreeWidgetItem* item );
+    bool isDir( SCRef fileName );
+    bool isModified( SCRef path, bool isDir = false );
+    void clear();
+    void getTreeSelectedItems( QStringList& selectedItems );
+    bool getTree( SCRef tSha, Git::TreeInfo& ti, bool wd, SCRef tPath );
+
+    const QPixmap* folderClosed;
+    const QPixmap* folderOpen;
+    const QPixmap* fileDefault;
+
+signals:
+    void updateViews( const QString& newRevSha, const QString& newFileName );
+    void contextMenu( const QString&, int type );
 };
 
 #endif

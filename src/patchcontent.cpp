@@ -1,392 +1,446 @@
 /*
-	Author: Marco Costalba (C) 2005-2007
+    Author: Marco Costalba (C) 2005-2007
 
-	Copyright: See COPYING file that comes with this distribution
+    Copyright: See COPYING file that comes with this distribution
 
 */
-#include <QScrollBar>
-#include <QTextCharFormat>
 #include "common.h"
 #include "domain.h"
 #include "git.h"
 #include "myprocess.h"
 #include "patchcontent.h"
 
-void DiffHighlighter::highlightBlock(const QString& text) {
+#include <QScrollBar>
+#include <QTextCharFormat>
 
-	// state is used to count paragraphs, starting from 0
-	setCurrentBlockState(previousBlockState() + 1);
-	if (text.isEmpty())
-		return;
+void
+DiffHighlighter::highlightBlock( const QString& text )
+{
+    //
+    // State is used to count paragraphs, starting from 0
+    //
+    setCurrentBlockState( previousBlockState() + 1 );
+    if( text.isEmpty() )
+        return;
 
-	const bool useDark = QPalette().color(QPalette::Window).value() > QPalette().color(QPalette::WindowText).value();
+    const bool useDark = QPalette().color( QPalette::Window ).value() >
+                         QPalette().color( QPalette::WindowText ).value();
 
-	QBrush blue    = useDark ? Qt::darkBlue    : QColor(Qt::cyan);
-	QBrush green   = useDark ? Qt::darkGreen   : QColor(Qt::green);
-	QBrush magenta = useDark ? Qt::darkMagenta : QColor(Qt::magenta);
-	QBrush backgroundPurple = useDark ? QGit::PURPLE : QGit::PURPLE.darker(600);
+    QBrush blue = useDark ? Qt::darkBlue : QColor( Qt::cyan );
+    QBrush green = useDark ? Qt::darkGreen : QColor( Qt::green );
+    QBrush magenta = useDark ? Qt::darkMagenta : QColor( Qt::magenta );
+    QBrush backgroundPurple = useDark ? QGit::PURPLE : QGit::PURPLE.darker( 600 );
 
-	QTextCharFormat myFormat;
-	const char firstChar = text.at(0).toLatin1();
-	switch (firstChar) {
-	case '@':
-		myFormat.setForeground(magenta);
-		break;
-	case '+':
-		myFormat.setForeground(green);
-		break;
-	case '-':
-		myFormat.setForeground(Qt::red);
-		break;
-	case 'c':
-	case 'd':
-	case 'i':
-	case 'n':
-	case 'o':
-	case 'r':
-	case 's':
-		if (text.startsWith("diff --git a/")) {
-			myFormat.setForeground(blue);
-			myFormat.setBackground(backgroundPurple);
-		} else if (text.startsWith("copy ")
-			|| text.startsWith("index ")
-			|| text.startsWith("new ")
-			|| text.startsWith("old ")
-			|| text.startsWith("rename ")
-			|| text.startsWith("similarity "))
-			myFormat.setForeground(blue);
+    QTextCharFormat myFormat;
+    const char firstChar = text.at( 0 ).toLatin1();
+    switch( firstChar )
+    {
+    case '@':
+        myFormat.setForeground( magenta );
+        break;
+    case '+':
+        myFormat.setForeground( green );
+        break;
+    case '-':
+        myFormat.setForeground( Qt::red );
+        break;
+    case 'c':
+    case 'd':
+    case 'i':
+    case 'n':
+    case 'o':
+    case 'r':
+    case 's':
+        if( text.startsWith( "diff --git a/" ) )
+        {
+            myFormat.setForeground( blue );
+            myFormat.setBackground( backgroundPurple );
+        }
+        else if( text.startsWith( "copy " ) || text.startsWith( "index " ) ||
+                 text.startsWith( "new " ) || text.startsWith( "old " ) ||
+                 text.startsWith( "rename " ) || text.startsWith( "similarity " ) )
+            myFormat.setForeground( blue );
 
-		else if (cl > 0 && text.startsWith("diff --combined")) {
-			myFormat.setForeground(blue);
-			myFormat.setBackground(backgroundPurple);
-		}
-		break;
-	case ' ':
-		if (cl > 0) {
-			if (text.left(cl).contains('+'))
-				myFormat.setForeground(green);
-			else if (text.left(cl).contains('-'))
-				myFormat.setForeground(Qt::red);
-		}
-		break;
-	}
-	if (myFormat.isValid())
-		setFormat(0, text.length(), myFormat);
+        else if( cl > 0 && text.startsWith( "diff --combined" ) )
+        {
+            myFormat.setForeground( blue );
+            myFormat.setBackground( backgroundPurple );
+        }
+        break;
+    case ' ':
+        if( cl > 0 )
+        {
+            if( text.left( cl ).contains( '+' ) )
+                myFormat.setForeground( green );
+            else if( text.left( cl ).contains( '-' ) )
+                myFormat.setForeground( Qt::red );
+        }
+        break;
+    }
+    if( myFormat.isValid() )
+        setFormat( 0, text.length(), myFormat );
 
-	PatchContent* pc = static_cast<PatchContent*>(parent());
-	if (pc->matches.count() > 0) {
-		int indexFrom, indexTo;
-		if (pc->getMatch(currentBlockState(), &indexFrom, &indexTo)) {
+    PatchContent* pc = static_cast< PatchContent* >( parent() );
+    if( pc->matches.count() > 0 )
+    {
+        int indexFrom, indexTo;
+        if( pc->getMatch( currentBlockState(), &indexFrom, &indexTo ) )
+        {
+            QTextEdit* te = dynamic_cast< QTextEdit* >( parent() );
+            QTextCharFormat fmt;
+            fmt.setFont( te->currentFont() );
+            fmt.setFontWeight( QFont::Bold );
+            fmt.setForeground( Qt::blue );
+            if( indexTo == 0 )
+                indexTo = text.length();
 
-			QTextEdit* te = dynamic_cast<QTextEdit*>(parent());
-			QTextCharFormat fmt;
-			fmt.setFont(te->currentFont());
-			fmt.setFontWeight(QFont::Bold);
-			fmt.setForeground(Qt::blue);
-			if (indexTo == 0)
-				indexTo = text.length();
-
-			setFormat(indexFrom, indexTo - indexFrom, fmt);
-		}
-	}
+            setFormat( indexFrom, indexTo - indexFrom, fmt );
+        }
+    }
 }
 
-PatchContent::PatchContent(QWidget* parent) : QTextEdit(parent) {
+PatchContent::PatchContent( QWidget* parent ) : QTextEdit( parent )
+{
+    diffLoaded = seekTarget = false;
+    curFilter = prevFilter = VIEW_ALL;
 
-	diffLoaded = seekTarget = false;
-	curFilter = prevFilter = VIEW_ALL;
+    pickAxeRE.setMinimal( true );
+    pickAxeRE.setCaseSensitivity( Qt::CaseInsensitive );
 
-	pickAxeRE.setMinimal(true);
-	pickAxeRE.setCaseSensitivity(Qt::CaseInsensitive);
-
-	setFont(QGit::TYPE_WRITER_FONT);
-	diffHighlighter = new DiffHighlighter(this);
+    setFont( QGit::TYPE_WRITER_FONT );
+    diffHighlighter = new DiffHighlighter( this );
 }
 
-void PatchContent::setup(Domain*, Git* g) {
-
-	git = g;
+void
+PatchContent::setup( Domain*, Git* g )
+{
+    git = g;
 }
 
-void PatchContent::clear() {
-
-	git->cancelProcess(proc);
-	QTextEdit::clear();
-	patchRowData.clear();
-	halfLine = "";
-	matches.clear();
-	diffLoaded = false;
-	seekTarget = !target.isEmpty();
+void
+PatchContent::clear()
+{
+    git->cancelProcess( proc );
+    QTextEdit::clear();
+    patchRowData.clear();
+    halfLine = "";
+    matches.clear();
+    diffLoaded = false;
+    seekTarget = !target.isEmpty();
 }
 
-void PatchContent::refresh() {
-
-	int topPara = topToLineNum();
-	setUpdatesEnabled(false);
-	QByteArray tmp(patchRowData);
-	clear();
-	patchRowData = tmp;
-	processData(patchRowData, &topPara);
-	scrollLineToTop(topPara);
-	setUpdatesEnabled(true);
+void
+PatchContent::refresh()
+{
+    int topPara = topToLineNum();
+    setUpdatesEnabled( false );
+    QByteArray tmp( patchRowData );
+    clear();
+    patchRowData = tmp;
+    processData( patchRowData, &topPara );
+    scrollLineToTop( topPara );
+    setUpdatesEnabled( true );
 }
 
-void PatchContent::scrollCursorToTop() {
-
-	QRect r = cursorRect();
-	QScrollBar* vsb = verticalScrollBar();
-	vsb->setValue(vsb->value() + r.top());
+void
+PatchContent::scrollCursorToTop()
+{
+    QRect r = cursorRect();
+    QScrollBar* vsb = verticalScrollBar();
+    vsb->setValue( vsb->value() + r.top() );
 }
 
-void PatchContent::scrollLineToTop(int lineNum) {
-
-	QTextCursor tc = textCursor();
-	tc.movePosition(QTextCursor::Start);
-	tc.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, lineNum);
-	setTextCursor(tc);
-	scrollCursorToTop();
+void
+PatchContent::scrollLineToTop( int lineNum )
+{
+    QTextCursor tc = textCursor();
+    tc.movePosition( QTextCursor::Start );
+    tc.movePosition( QTextCursor::NextBlock, QTextCursor::MoveAnchor, lineNum );
+    setTextCursor( tc );
+    scrollCursorToTop();
 }
 
-int PatchContent::positionToLineNum(int pos) {
-
-	QTextCursor tc = textCursor();
-	tc.setPosition(pos);
-	return tc.blockNumber();
+int
+PatchContent::positionToLineNum( int pos )
+{
+    QTextCursor tc = textCursor();
+    tc.setPosition( pos );
+    return tc.blockNumber();
 }
 
-int PatchContent::topToLineNum() {
-
-	return cursorForPosition(QPoint(1, 1)).blockNumber();
+int
+PatchContent::topToLineNum()
+{
+    return cursorForPosition( QPoint( 1, 1 ) ).blockNumber();
 }
 
-bool PatchContent::centerTarget(SCRef target) {
+bool
+PatchContent::centerTarget( SCRef target )
+{
+    moveCursor( QTextCursor::Start );
 
-	moveCursor(QTextCursor::Start);
+    //
+    // find() updates cursor position
+    //
+    if( !find( target, QTextDocument::FindCaseSensitively | QTextDocument::FindWholeWords ) )
+        return false;
 
-	// find() updates cursor position
-	if (!find(target, QTextDocument::FindCaseSensitively | QTextDocument::FindWholeWords))
-		return false;
+    //
+    // Move to the beginning of the line
+    //
+    moveCursor( QTextCursor::StartOfLine );
 
-	// move to the beginning of the line
-	moveCursor(QTextCursor::StartOfLine);
+    //
+    // Grap copy of current cursor state
+    //
+    QTextCursor tc = textCursor();
 
-	// grap copy of current cursor state
-	QTextCursor tc = textCursor();
+    //
+    // Move the target line to the top
+    //
+    moveCursor( QTextCursor::End );
+    setTextCursor( tc );
 
-	// move the target line to the top
-	moveCursor(QTextCursor::End);
-	setTextCursor(tc);
-
-	return true;
+    return true;
 }
 
-void PatchContent::centerOnFileHeader(StateInfo& st) {
+void
+PatchContent::centerOnFileHeader( StateInfo& st )
+{
+    if( st.fileName().isEmpty() )
+        return;
 
-	if (st.fileName().isEmpty())
-		return;
-
-	target = st.fileName();
-	bool combined = (st.isMerge() && !st.allMergeFiles());
-	git->formatPatchFileHeader(&target, st.sha(), st.diffToSha(), combined, st.allMergeFiles());
-	seekTarget = !target.isEmpty();
-	if (seekTarget)
-		seekTarget = !centerTarget(target);
+    target = st.fileName();
+    bool combined = ( st.isMerge() && !st.allMergeFiles() );
+    git->formatPatchFileHeader( &target, st.sha(), st.diffToSha(), combined, st.allMergeFiles() );
+    seekTarget = !target.isEmpty();
+    if( seekTarget )
+        seekTarget = !centerTarget( target );
 }
 
-void PatchContent::centerMatch(int id) {
-
-	if (matches.count() <= id)
-		return;
-//FIXME
-//	patchTab->textEditDiff->setSelection(matches[id].paraFrom, matches[id].indexFrom,
-//	                                     matches[id].paraTo, matches[id].indexTo);
+void
+PatchContent::centerMatch( int id )
+{
+    if( matches.count() <= id )
+        return;
+    // FIXME:
+    //	patchTab->textEditDiff->setSelection(matches[id].paraFrom, matches[id].indexFrom,
+    //	                                     matches[id].paraTo, matches[id].indexTo);
 }
 
-void PatchContent::procReadyRead(const QByteArray& data) {
-
-	patchRowData.append(data);
-	if (document()->isEmpty() && isVisible())
-		processData(data);
+void
+PatchContent::procReadyRead( const QByteArray& data )
+{
+    patchRowData.append( data );
+    if( document()->isEmpty() && isVisible() )
+        processData( data );
 }
 
-void PatchContent::typeWriterFontChanged() {
-
-	setFont(QGit::TYPE_WRITER_FONT);
-	setPlainText(toPlainText());
+void
+PatchContent::typeWriterFontChanged()
+{
+    setFont( QGit::TYPE_WRITER_FONT );
+    setPlainText( toPlainText() );
 }
 
-void PatchContent::processData(const QByteArray& fileChunk, int* prevLineNum) {
+void
+PatchContent::processData( const QByteArray& fileChunk, int* prevLineNum )
+{
+    QString newLines;
+    if( !QGit::stripPartialParaghraps( fileChunk, &newLines, &halfLine ) )
+        return;
 
-	QString newLines;
-	if (!QGit::stripPartialParaghraps(fileChunk, &newLines, &halfLine))
-		return;
+    if( !prevLineNum && curFilter == VIEW_ALL )
+        goto skip_filter;  // Optimize common case
 
-	if (!prevLineNum && curFilter == VIEW_ALL)
-		goto skip_filter; // optimize common case
+    {
+        //
+        // NOTE: scoped code because of goto
+        //
+        QString filteredLines;
+        int notNegCnt = 0, notPosCnt = 0;
+        QVector< int > toAdded( 1 ), toRemoved( 1 );  // Lines count from 1
 
-	{ // scoped code because of goto
+        //
+        // prevLineNum will be set to the number of corresponding
+        // line in full patch. Number is negative just for algorithm
+        // reasons, prevLineNum counts lines from 1
+        //
+        if( prevLineNum && prevFilter == VIEW_ALL )
+            *prevLineNum = -( *prevLineNum );  // Set once
 
-	QString filteredLines;
-	int notNegCnt = 0, notPosCnt = 0;
-	QVector<int> toAdded(1), toRemoved(1); // lines count from 1
+        const QStringList sl( newLines.split( '\n', QString::KeepEmptyParts ) );
+        FOREACH_SL( it, sl )
+        {
+            //
+            // Do not remove diff header because of centerTarget
+            //
+            bool n = ( *it ).startsWith( '-' ) && !( *it ).startsWith( "---" );
+            bool p = ( *it ).startsWith( '+' ) && !( *it ).startsWith( "+++" );
 
-	// prevLineNum will be set to the number of corresponding
-	// line in full patch. Number is negative just for algorithm
-	// reasons, prevLineNum counts lines from 1
-	if (prevLineNum && prevFilter == VIEW_ALL)
-		*prevLineNum = -(*prevLineNum); // set once
+            if( !p )
+                notPosCnt++;
+            if( !n )
+                notNegCnt++;
 
-	const QStringList sl(newLines.split('\n', QString::KeepEmptyParts));
-	FOREACH_SL (it, sl) {
+            toAdded.append( notNegCnt );
+            toRemoved.append( notPosCnt );
 
-		// do not remove diff header because of centerTarget
-		bool n = (*it).startsWith('-') && !(*it).startsWith("---");
-		bool p = (*it).startsWith('+') && !(*it).startsWith("+++");
+            int curLineNum = toAdded.count() - 1;
 
-		if (!p)
-			notPosCnt++;
-		if (!n)
-			notNegCnt++;
+            bool toRemove = ( n && curFilter == VIEW_ADDED ) || ( p && curFilter == VIEW_REMOVED );
+            if( !toRemove )
+                filteredLines.append( *it ).append( '\n' );
 
-		toAdded.append(notNegCnt);
-		toRemoved.append(notPosCnt);
+            if( prevLineNum && *prevLineNum == notNegCnt && prevFilter == VIEW_ADDED )
+                *prevLineNum = -curLineNum;  // Set once
 
-		int curLineNum = toAdded.count() - 1;
+            if( prevLineNum && *prevLineNum == notPosCnt && prevFilter == VIEW_REMOVED )
+                *prevLineNum = -curLineNum;  // Set once
+        }
+        if( prevLineNum && *prevLineNum <= 0 )
+        {
+            if( curFilter == VIEW_ALL )
+                *prevLineNum = -( *prevLineNum );
 
-		bool toRemove = (n && curFilter == VIEW_ADDED) || (p && curFilter == VIEW_REMOVED);
-		if (!toRemove)
-			filteredLines.append(*it).append('\n');
+            else if( curFilter == VIEW_ADDED )
+                *prevLineNum = toAdded.at( -( *prevLineNum ) );
 
-		if (prevLineNum && *prevLineNum == notNegCnt && prevFilter == VIEW_ADDED)
-			*prevLineNum = -curLineNum; // set once
+            else if( curFilter == VIEW_REMOVED )
+                *prevLineNum = toRemoved.at( -( *prevLineNum ) );
 
-		if (prevLineNum && *prevLineNum == notPosCnt && prevFilter == VIEW_REMOVED)
-			*prevLineNum = -curLineNum; // set once
-	}
-	if (prevLineNum && *prevLineNum <= 0) {
-		if (curFilter == VIEW_ALL)
-			*prevLineNum = -(*prevLineNum);
+            if( *prevLineNum < 0 )
+                *prevLineNum = 0;
+        }
+        newLines = filteredLines;
 
-		else if (curFilter == VIEW_ADDED)
-			*prevLineNum = toAdded.at(-(*prevLineNum));
-
-		else if (curFilter == VIEW_REMOVED)
-			*prevLineNum = toRemoved.at(-(*prevLineNum));
-
-		if (*prevLineNum < 0)
-			*prevLineNum = 0;
-	}
-	newLines = filteredLines;
-
-	} // end of scoped code
+    }  // End of scoped code
 
 skip_filter:
 
-	setUpdatesEnabled(false);
+    setUpdatesEnabled( false );
 
-	if (prevLineNum || document()->isEmpty()) { // use the faster setPlainText()
-
-		setPlainText(newLines);
-		moveCursor(QTextCursor::Start);
-	} else {
-		int topLine = cursorForPosition(QPoint(1, 1)).blockNumber();
-		append(newLines);
-		if (topLine > 0)
-			scrollLineToTop(topLine);
-	}
-	QScrollBar* vsb = verticalScrollBar();
-	vsb->setValue(vsb->value() + cursorRect().top());
-	setUpdatesEnabled(true);
+    if( prevLineNum || document()->isEmpty() )
+    {
+        //
+        // Use the faster setPlainText()
+        //
+        setPlainText( newLines );
+        moveCursor( QTextCursor::Start );
+    }
+    else
+    {
+        int topLine = cursorForPosition( QPoint( 1, 1 ) ).blockNumber();
+        append( newLines );
+        if( topLine > 0 )
+            scrollLineToTop( topLine );
+    }
+    QScrollBar* vsb = verticalScrollBar();
+    vsb->setValue( vsb->value() + cursorRect().top() );
+    setUpdatesEnabled( true );
 }
 
-void PatchContent::procFinished() {
+void
+PatchContent::procFinished()
+{
+    if( !patchRowData.endsWith( "\n" ) )
+        patchRowData.append( '\n' );  // Flush pending half lines
 
-	if (!patchRowData.endsWith("\n"))
-		patchRowData.append('\n'); // flush pending half lines
+    refresh();  // Show patchRowData content
 
-	refresh(); // show patchRowData content
+    if( seekTarget )
+        seekTarget = !centerTarget( target );
 
-	if (seekTarget)
-		seekTarget = !centerTarget(target);
-
-	diffLoaded = true;
-	if (computeMatches()) {
-		diffHighlighter->rehighlight(); // slow on big data
-		centerMatch();
-	}
+    diffLoaded = true;
+    if( computeMatches() )
+    {
+        diffHighlighter->rehighlight();  // Slow on big data
+        centerMatch();
+    }
 }
 
-int PatchContent::doSearch(SCRef txt, int pos) {
+int
+PatchContent::doSearch( SCRef txt, int pos )
+{
+    if( isRegExp )
+        return txt.indexOf( pickAxeRE, pos );
 
-	if (isRegExp)
-		return txt.indexOf(pickAxeRE, pos);
-
-	return txt.indexOf(pickAxeRE.pattern(), pos, Qt::CaseInsensitive);
+    return txt.indexOf( pickAxeRE.pattern(), pos, Qt::CaseInsensitive );
 }
 
-bool PatchContent::computeMatches() {
+bool
+PatchContent::computeMatches()
+{
+    matches.clear();
+    if( pickAxeRE.isEmpty() )
+        return false;
 
-	matches.clear();
-	if (pickAxeRE.isEmpty())
-		return false;
+    SCRef txt = toPlainText();
+    int pos, lastPos = 0, lastPara = 0;
 
-	SCRef txt = toPlainText();
-	int pos, lastPos = 0, lastPara = 0;
+    //
+    // Must be at the end to catch patterns across more the one chunk
+    //
+    while( ( pos = doSearch( txt, lastPos ) ) != -1 )
+    {
+        matches.append( MatchSelection() );
+        MatchSelection& s = matches.last();
 
-	// must be at the end to catch patterns across more the one chunk
-	while ((pos = doSearch(txt, lastPos)) != -1) {
+        s.paraFrom = txt.mid( lastPos, pos - lastPos ).count( '\n' );
+        s.paraFrom += lastPara;
+        s.indexFrom = pos - txt.lastIndexOf( '\n', pos ) - 1;  // NOTE: index starts from 0
 
-		matches.append(MatchSelection());
-		MatchSelection& s = matches.last();
+        lastPos = pos;
+        pos += ( isRegExp ? pickAxeRE.matchedLength() : pickAxeRE.pattern().length() );
+        pos--;
 
-		s.paraFrom = txt.mid(lastPos, pos - lastPos).count('\n');
-		s.paraFrom += lastPara;
-		s.indexFrom = pos - txt.lastIndexOf('\n', pos) - 1; // index starts from 0
+        s.paraTo = s.paraFrom + txt.mid( lastPos, pos - lastPos ).count( '\n' );
+        s.indexTo = pos - txt.lastIndexOf( '\n', pos ) - 1;
+        s.indexTo++;  // In QTextEdit::setSelection() indexTo is not included
 
-		lastPos = pos;
-		pos += (isRegExp ? pickAxeRE.matchedLength() : pickAxeRE.pattern().length());
-		pos--;
-
-		s.paraTo = s.paraFrom + txt.mid(lastPos, pos - lastPos).count('\n');
-		s.indexTo = pos - txt.lastIndexOf('\n', pos) - 1;
-		s.indexTo++; // in QTextEdit::setSelection() indexTo is not included
-
-		lastPos = pos;
-		lastPara = s.paraTo;
-	}
-	return !matches.isEmpty();
+        lastPos = pos;
+        lastPara = s.paraTo;
+    }
+    return !matches.isEmpty();
 }
 
-bool PatchContent::getMatch(int para, int* indexFrom, int* indexTo) {
-
-	for (int i = 0; i < matches.count(); i++)
-		if (matches[i].paraFrom <= para && matches[i].paraTo >= para) {
-
-			*indexFrom = (para == matches[i].paraFrom ? matches[i].indexFrom : 0);
-			*indexTo = (para == matches[i].paraTo ? matches[i].indexTo : 0);
-			return true;
-		}
-	return false;
+bool
+PatchContent::getMatch( int para, int* indexFrom, int* indexTo )
+{
+    for( int i = 0; i < matches.count(); i++ )
+    {
+        if( matches[ i ].paraFrom <= para && matches[ i ].paraTo >= para )
+        {
+            *indexFrom = ( para == matches[ i ].paraFrom ? matches[ i ].indexFrom : 0 );
+            *indexTo = ( para == matches[ i ].paraTo ? matches[ i ].indexTo : 0 );
+            return true;
+        }
+    }
+    return false;
 }
 
-void PatchContent::on_highlightPatch(const QString& exp, bool re) {
-
-	pickAxeRE.setPattern(exp);
-	isRegExp = re;
-	if (diffLoaded)
-		procFinished();
+void
+PatchContent::on_highlightPatch( const QString& exp, bool re )
+{
+    pickAxeRE.setPattern( exp );
+    isRegExp = re;
+    if( diffLoaded )
+        procFinished();
 }
 
-void PatchContent::update(StateInfo& st) {
+void
+PatchContent::update( StateInfo& st )
+{
+    bool combined = ( st.isMerge() && !st.allMergeFiles() );
+    if( combined )
+    {
+        const Rev* r = git->revLookup( st.sha() );
+        if( r )
+            diffHighlighter->setCombinedLength( r->parentsCount() );
+    }
+    else
+        diffHighlighter->setCombinedLength( 0 );
 
-	bool combined = (st.isMerge() && !st.allMergeFiles());
-	if (combined) {
-		const Rev* r = git->revLookup(st.sha());
-		if (r)
-			diffHighlighter->setCombinedLength(r->parentsCount());
-	} else
-		diffHighlighter->setCombinedLength(0);
-
-	clear();
-	proc = git->getDiff(st.sha(), this, st.diffToSha(), combined); // non blocking
+    clear();
+    proc = git->getDiff( st.sha(), this, st.diffToSha(), combined );  // Non blocking
 }

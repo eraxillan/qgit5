@@ -1,54 +1,57 @@
 /*
-	Author: Marco Costalba (C) 2005-2007
+    Author: Marco Costalba (C) 2005-2007
 
-	Copyright: See COPYING file that comes with this distribution
+    Copyright: See COPYING file that comes with this distribution
 
 */
 #ifndef PATCHVIEW_H
 #define PATCHVIEW_H
 
-#include "ui_patchview.h"
 #include "domain.h"
+#include "ui_patchview.h"
 
 class Git;
 
-class PatchView :public Domain {
-Q_OBJECT
-public:
-	PatchView() {}
-	PatchView(MainImpl* mi, Git* g);
-	~PatchView();
-	void clear(bool complete = true);
-	Ui_TabPatch* tab() { return patchTab; }
+class PatchView : public Domain
+{
+    Q_OBJECT
 
-signals:
-	void diffTo(const QString&);
-	void diffViewerDocked();
+    enum ButtonId
+    {
+        DIFF_TO_PARENT = 0,
+        DIFF_TO_HEAD = 1,
+        DIFF_TO_SHA = 2
+    };
 
-public slots:
-	void on_updateRevDesc();
-	void lineEditDiff_returnPressed();
-	void button_clicked(int);
-	void buttonFilterPatch_clicked();
+    Ui_TabPatch* patchTab;
+    QString normalizedSha;
 
-protected slots:
-	virtual void on_contextMenu(const QString&, int);
+    void updatePatch();
+    void saveRestoreSizes( bool startup = false );
 
 protected:
-	virtual bool doUpdate(bool force);
+    virtual bool doUpdate( bool force );
 
-private:
-	void updatePatch();
-	void saveRestoreSizes(bool startup = false);
+protected slots:
+    virtual void on_contextMenu( const QString&, int );
 
-	Ui_TabPatch* patchTab;
-	QString normalizedSha;
+public:
+    PatchView() {}
+    PatchView( MainImpl* mi, Git* g );
+    ~PatchView();
 
-	enum ButtonId {
-		DIFF_TO_PARENT = 0,
-		DIFF_TO_HEAD   = 1,
-		DIFF_TO_SHA    = 2
-	};
+    void clear( bool complete = true );
+    Ui_TabPatch* tab() { return patchTab; }
+
+signals:
+    void diffTo( const QString& );
+    void diffViewerDocked();
+
+public slots:
+    void on_updateRevDesc();
+    void lineEditDiff_returnPressed();
+    void button_clicked( int );
+    void buttonFilterPatch_clicked();
 };
 
 #endif

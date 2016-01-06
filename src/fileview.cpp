@@ -1,384 +1,492 @@
 /*
-	Description: file viewer window
+    Description: file viewer window
 
-	Author: Marco Costalba (C) 2005-2007
+    Author: Marco Costalba (C) 2005-2007
 
-	Copyright: See COPYING file that comes with this distribution
+    Copyright: See COPYING file that comes with this distribution
 
 */
 #include <QHelpEvent>
+
 #include "FileHistory.h"
-#include "mainimpl.h"
-#include "git.h"
 #include "annotate.h"
-#include "listview.h"
 #include "filecontent.h"
 #include "fileview.h"
+#include "git.h"
+#include "listview.h"
+#include "mainimpl.h"
 
 #define MAX_LINE_NUM 5
 
-FileView::FileView(MainImpl* mi, Git* g) : Domain(mi, g, false) {
+FileView::FileView() {}
+FileView::FileView( MainImpl* mi, Git* g ) : Domain( mi, g, false )
+{
+    fileTab = new Ui_TabFile();
+    fileTab->setupUi( container );
+    fileTab->histListView->setup( this, git );
+    fileTab->textEditFile->setup( this, git, fileTab->listWidgetAnn );
 
-	fileTab = new Ui_TabFile();
-	fileTab->setupUi(container);
-	fileTab->histListView->setup(this, git);
-	fileTab->textEditFile->setup(this, git, fileTab->listWidgetAnn);
+    // An empty string turn off the special-value text display
+    fileTab->spinBoxRevision->setSpecialValueText( " " );
 
-	// an empty string turn off the special-value text display
-	fileTab->spinBoxRevision->setSpecialValueText(" ");
+    // Add GNU source-highlight version to tooltip, or add a message that it's not installed
+    QToolButton* highlight = fileTab->toolButtonHighlightText;
+    highlight->setToolTip( highlight->toolTip().arg( git->textHighlighterVersion() ) );
 
-	// Add GNU source-highlight version to tooltip, or add a message that it's not installed.
-	QToolButton* highlight = fileTab->toolButtonHighlightText;
-	highlight->setToolTip(highlight->toolTip().arg(git->textHighlighterVersion()));
+    // Init some stuff
+    clear( true );
 
-	clear(true); // init some stuff
+    fileTab->listWidgetAnn->installEventFilter( this );
 
-	fileTab->listWidgetAnn->installEventFilter(this);
+    connect( git, SIGNAL( loadCompleted( const FileHistory*, const QString& ) ), this,
+             SLOT( on_loadCompleted( const FileHistory*, const QString& ) ) );
 
-	connect(git, SIGNAL(loadCompleted(const FileHistory*, const QString&)),
-	        this, SLOT(on_loadCompleted(const FileHistory*, const QString&)));
+    connect( m(), SIGNAL( changeFont( const QFont& ) ), fileTab->histListView,
+             SLOT( on_changeFont( const QFont& ) ) );
 
-	connect(m(), SIGNAL(changeFont(const QFont&)),
-	        fileTab->histListView, SLOT(on_changeFont(const QFont&)));
+    connect( fileTab->histListView, SIGNAL( contextMenu( const QString&, int ) ), this,
+             SLOT( on_contextMenu( const QString&, int ) ) );
 
-	connect(fileTab->histListView, SIGNAL(contextMenu(const QString&, int)),
-	        this, SLOT(on_contextMenu(const QString&, int)));
+    connect( fileTab->textEditFile, SIGNAL( annotationAvailable( bool ) ), this,
+             SLOT( on_annotationAvailable( bool ) ) );
 
-	connect(fileTab->textEditFile, SIGNAL(annotationAvailable(bool)),
-	        this, SLOT(on_annotationAvailable(bool)));
+    connect( fileTab->textEditFile, SIGNAL( fileAvailable( bool ) ), this,
+             SLOT( on_fileAvailable( bool ) ) );
 
-	connect(fileTab->textEditFile, SIGNAL(fileAvailable(bool)),
-	        this, SLOT(on_fileAvailable(bool)));
+    connect( fileTab->textEditFile, SIGNAL( revIdSelected( int ) ), this,
+             SLOT( on_revIdSelected( int ) ) );
 
-	connect(fileTab->textEditFile, SIGNAL(revIdSelected(int)),
-	        this, SLOT(on_revIdSelected(int)));
+    connect( fileTab->toolButtonCopy, SIGNAL( clicked() ), this,
+             SLOT( on_toolButtonCopy_clicked() ) );
 
-	connect(fileTab->toolButtonCopy, SIGNAL(clicked()),
-	        this, SLOT(on_toolButtonCopy_clicked()));
+    connect( fileTab->toolButtonShowAnnotate, SIGNAL( toggled( bool ) ), this,
+             SLOT( on_toolButtonShowAnnotate_toggled( bool ) ) );
 
-	connect(fileTab->toolButtonShowAnnotate, SIGNAL(toggled(bool)),
-	        this, SLOT(on_toolButtonShowAnnotate_toggled(bool)));
+    connect( fileTab->toolButtonFindAnnotate, SIGNAL( toggled( bool ) ), this,
+             SLOT( on_toolButtonFindAnnotate_toggled( bool ) ) );
 
-	connect(fileTab->toolButtonFindAnnotate, SIGNAL(toggled(bool)),
-	        this, SLOT(on_toolButtonFindAnnotate_toggled(bool)));
+    connect( fileTab->toolButtonGoNext, SIGNAL( clicked() ), this,
+             SLOT( on_toolButtonGoNext_clicked() ) );
 
-	connect(fileTab->toolButtonGoNext, SIGNAL(clicked()),
-	        this, SLOT(on_toolButtonGoNext_clicked()));
+    connect( fileTab->toolButtonGoPrev, SIGNAL( clicked() ), this,
+             SLOT( on_toolButtonGoPrev_clicked() ) );
 
-	connect(fileTab->toolButtonGoPrev, SIGNAL(clicked()),
-	        this, SLOT(on_toolButtonGoPrev_clicked()));
+    connect( fileTab->toolButtonRangeFilter, SIGNAL( toggled( bool ) ), this,
+             SLOT( on_toolButtonRangeFilter_toggled( bool ) ) );
 
-	connect(fileTab->toolButtonRangeFilter, SIGNAL(toggled(bool)),
-	        this, SLOT(on_toolButtonRangeFilter_toggled(bool)));
+    connect( fileTab->toolButtonPin, SIGNAL( toggled( bool ) ), this,
+             SLOT( on_toolButtonPin_toggled( bool ) ) );
 
-	connect(fileTab->toolButtonPin, SIGNAL(toggled(bool)),
-	        this, SLOT(on_toolButtonPin_toggled(bool)));
+    connect( fileTab->toolButtonHighlightText, SIGNAL( toggled( bool ) ), this,
+             SLOT( on_toolButtonHighlightText_toggled( bool ) ) );
 
-	connect(fileTab->toolButtonHighlightText, SIGNAL(toggled(bool)),
-	        this, SLOT(on_toolButtonHighlightText_toggled(bool)));
-
-	connect(fileTab->spinBoxRevision, SIGNAL(valueChanged(int)),
-	        this, SLOT(on_spinBoxRevision_valueChanged(int)));
+    connect( fileTab->spinBoxRevision, SIGNAL( valueChanged( int ) ), this,
+             SLOT( on_spinBoxRevision_valueChanged( int ) ) );
 }
 
-FileView::~FileView() {
-
-	if (!parent())
-		return;
-
-	delete fileTab->textEditFile; // must be deleted before fileTab
-	delete fileTab;
-	showStatusBarMessage(""); // cleanup any pending progress info
-	QApplication::restoreOverrideCursor();
+FileView::~FileView()
+{
+    if( !parent() )
+        return;
+    //
+    // Must be deleted before fileTab
+    //
+    delete fileTab->textEditFile;
+    delete fileTab;
+    //
+    // Cleanup any pending progress info
+    //
+    showStatusBarMessage( "" );
+    QApplication::restoreOverrideCursor();
 }
 
-bool FileView::eventFilter(QObject* obj, QEvent* e) {
-
-	QListWidget* lw = fileTab->listWidgetAnn;
-	if (e->type() == QEvent::ToolTip && obj == lw) {
-		QHelpEvent* h = static_cast<QHelpEvent*>(e);
-		int id = fileTab->textEditFile->itemAnnId(lw->itemAt(h->pos()));
-		QRegExp re;
-		SCRef sha(fileTab->histListView->shaFromAnnId(id));
-		SCRef d(git->getDesc(sha, re, re, false, model()));
-		lw->setToolTip(d);
-	}
-	return QObject::eventFilter(obj, e);
+Ui_TabFile*
+FileView::tab()
+{
+    return fileTab;
 }
 
-void FileView::clear(bool complete) {
+bool
+FileView::eventFilter( QObject* obj, QEvent* e )
+{
+    QListWidget* lw = fileTab->listWidgetAnn;
+    if( ( e->type() == QEvent::ToolTip ) && ( obj == lw ) )
+    {
+        QHelpEvent* h = static_cast< QHelpEvent* >( e );
+        int id = fileTab->textEditFile->itemAnnId( lw->itemAt( h->pos() ) );
+        QRegExp re;
+        SCRef sha( fileTab->histListView->shaFromAnnId( id ) );
+        SCRef d( git->getDesc( sha, re, re, false, model() ) );
+        lw->setToolTip( d );
+    }
 
-	Domain::clear(complete);
-
-	if (complete) {
-		setTabCaption("File");
-		fileTab->toolButtonCopy->setEnabled(false);
-	}
-	fileTab->textEditFile->clearAll(); // emits file/ann available signals
-
-	fileTab->toolButtonPin->setEnabled(false);
-	fileTab->toolButtonPin->setChecked(false); // TODO signals pressed() and clicked() are not emitted
-	fileTab->spinBoxRevision->setEnabled(false);
-	fileTab->spinBoxRevision->setValue(fileTab->spinBoxRevision->minimum()); // clears the box
+    return QObject::eventFilter( obj, e );
 }
 
-bool FileView::goToCurrentAnnotation(int direction) {
+void
+FileView::clear( bool complete )
+{
+    Domain::clear( complete );
 
-	SCRef ids = fileTab->histListView->currentText(QGit::ANN_ID_COL);
-	int id = (!ids.isEmpty() ? ids.toInt() : 0);
-	fileTab->textEditFile->goToAnnotation(id, direction);
-	return (id != 0);
+    if( complete )
+    {
+        setTabCaption( "File" );
+        fileTab->toolButtonCopy->setEnabled( false );
+    }
+
+    //
+    // Emits file/ann available signals
+    //
+    fileTab->textEditFile->clearAll();
+
+    fileTab->toolButtonPin->setEnabled( false );
+    //
+    // TODO: signals pressed() and clicked() are not emitted
+    //
+    fileTab->toolButtonPin->setChecked( false );
+    fileTab->spinBoxRevision->setEnabled( false );
+    //    
+    // Clears the box
+    //
+    fileTab->spinBoxRevision->setValue( fileTab->spinBoxRevision->minimum() );
 }
 
-void FileView::updateSpinBoxValue() {
-
-	SCRef ids = fileTab->histListView->currentText(QGit::ANN_ID_COL);
-	if (    ids.isEmpty()
-	    || !fileTab->spinBoxRevision->isEnabled()
-	    ||  fileTab->spinBoxRevision->value() == ids.toInt())
-		return;
-
-	fileTab->spinBoxRevision->setValue(ids.toInt()); // emit QSpinBox::valueChanged()
+bool
+FileView::goToCurrentAnnotation( int direction )
+{
+    SCRef ids = fileTab->histListView->currentText( QGit::ANN_ID_COL );
+    int id = ( !ids.isEmpty() ? ids.toInt() : 0 );
+    fileTab->textEditFile->goToAnnotation( id, direction );
+    return ( id != 0 );
 }
 
-bool FileView::isMatch(SCRef sha) {
+void
+FileView::updateSpinBoxValue()
+{
+    SCRef ids = fileTab->histListView->currentText( QGit::ANN_ID_COL );
+    if( ids.isEmpty() || !fileTab->spinBoxRevision->isEnabled() ||
+        fileTab->spinBoxRevision->value() == ids.toInt() )
+    {
+        return;
+    }
 
-	static RangeInfo r; // fast path here, avoid allocation on each call
-	if (!fileTab->textEditFile->getRange(sha, &r))
-		return false;
-
-	return r.modified;
+    //
+    // Emit QSpinBox::valueChanged()
+    //
+    fileTab->spinBoxRevision->setValue( ids.toInt() );
 }
 
-void FileView::filterOnRange(bool isOn) {
-
-	int matchedCnt = fileTab->histListView->filterRows(isOn, false);
-	QString msg;
-	if (isOn)
-		msg = QString("Found %1 matches. Toggle filter "
-		              "button to remove the filter").arg(matchedCnt);
-
-	showStatusBarMessage(msg);
-	QApplication::postEvent(this, new MessageEvent(msg)); // deferred message, after update
+bool
+FileView::isMatch( SCRef sha )
+{
+    //
+    // Fast path here, avoid allocation on each call
+    //
+    static RangeInfo r;
+    if( !fileTab->textEditFile->getRange( sha, &r ) )
+    {
+        return false;
+    }
+    return r.modified;
 }
 
-bool FileView::doUpdate(bool force) {
+void
+FileView::filterOnRange( bool isOn )
+{
+    int matchedCnt = fileTab->histListView->filterRows( isOn, false );
+    QString msg;
+    if( isOn )
+    {
+        msg = QString(
+                  "Found %1 matches. Toggle filter "
+                  "button to remove the filter" )
+                  .arg( matchedCnt );
+    }
 
-	if (st.fileName().isEmpty())
-		return false;
+    showStatusBarMessage( msg );
+    //
+    // Deferred message, after update
+    //
+    QApplication::postEvent( this, new MessageEvent( msg ) );
+}
 
-	if (st.isChanged(StateInfo::FILE_NAME) || force) {
+bool
+FileView::doUpdate( bool force )
+{
+    if( st.fileName().isEmpty() )
+        return false;
 
-		clear(false);
-		setTabCaption(st.fileName());
+    if( st.isChanged( StateInfo::FILE_NAME ) || force )
+    {
+        clear( false );
+        setTabCaption( st.fileName() );
 
-		if (git->startFileHistory(st.sha(), st.fileName(), model())) {
-			QApplication::restoreOverrideCursor();
-			QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-			showStatusBarMessage("Retrieving history of '" +
-			                      st.fileName() + "'...");
-		}
-	} else if (fileTab->histListView->update() || st.sha().isEmpty()) {
+        if( git->startFileHistory( st.sha(), st.fileName(), model() ) )
+        {
+            QApplication::restoreOverrideCursor();
+            QApplication::setOverrideCursor( QCursor( Qt::WaitCursor ) );
+            showStatusBarMessage( "Retrieving history of '" + st.fileName() + "'..." );
+        }
+    }
+    else if( fileTab->histListView->update() || st.sha().isEmpty() )
+    {
+        updateSpinBoxValue();
+        showStatusBarMessage( git->getRevInfo( st.sha() ) );
+    }
+    if( !fileTab->toolButtonPin->isChecked() )
+        fileTab->textEditFile->doUpdate();
 
-		updateSpinBoxValue();
-		showStatusBarMessage(git->getRevInfo(st.sha()));
-	}
-	if (!fileTab->toolButtonPin->isChecked())
-		fileTab->textEditFile->doUpdate();
-
-	return true; // always accept new state
+    //
+    // Always accept new state
+    //
+    return true;
 }
 
 // ************************************ SLOTS ********************************
 
-void FileView::updateEnabledButtons() {
+void
+FileView::updateEnabledButtons()
+{
+    QToolButton* copy = fileTab->toolButtonCopy;
+    QToolButton* showAnnotate = fileTab->toolButtonShowAnnotate;
+    QToolButton* findAnnotate = fileTab->toolButtonFindAnnotate;
+    QToolButton* goPrev = fileTab->toolButtonGoPrev;
+    QToolButton* goNext = fileTab->toolButtonGoNext;
+    QToolButton* rangeFilter = fileTab->toolButtonRangeFilter;
+    QToolButton* highlight = fileTab->toolButtonHighlightText;
 
-	QToolButton* copy = fileTab->toolButtonCopy;
-	QToolButton* showAnnotate = fileTab->toolButtonShowAnnotate;
-	QToolButton* findAnnotate = fileTab->toolButtonFindAnnotate;
-	QToolButton* goPrev = fileTab->toolButtonGoPrev;
-	QToolButton* goNext = fileTab->toolButtonGoNext;
-	QToolButton* rangeFilter = fileTab->toolButtonRangeFilter;
-	QToolButton* highlight = fileTab->toolButtonHighlightText;
+    bool fileAvailable = fileTab->textEditFile->isFileAvailable();
+    bool annotateAvailable = fileTab->textEditFile->isAnnotateAvailable();
 
-	bool fileAvailable = fileTab->textEditFile->isFileAvailable();
-	bool annotateAvailable = fileTab->textEditFile->isAnnotateAvailable();
+    //
+    // First enable
+    //
+    copy->setEnabled( fileAvailable );
+    showAnnotate->setEnabled( annotateAvailable );
+    findAnnotate->setEnabled( annotateAvailable );
+    goPrev->setEnabled( annotateAvailable );
+    goNext->setEnabled( annotateAvailable );
+    rangeFilter->setEnabled( annotateAvailable );
+    highlight->setEnabled( fileAvailable && git->isTextHighlighter() );
 
-	// first enable
-	copy->setEnabled(fileAvailable);
-	showAnnotate->setEnabled(annotateAvailable);
-	findAnnotate->setEnabled(annotateAvailable);
-	goPrev->setEnabled(annotateAvailable);
-	goNext->setEnabled(annotateAvailable);
-	rangeFilter->setEnabled(annotateAvailable);
-	highlight->setEnabled(fileAvailable && git->isTextHighlighter());
+    //
+    // ...then disable
+    //
+    if( !showAnnotate->isChecked() )
+    {
+        findAnnotate->setEnabled( false );
+        goPrev->setEnabled( false );
+        goNext->setEnabled( false );
+    }
+    if( highlight->isChecked() )
+        rangeFilter->setEnabled( false );
 
-	// then disable
-	if (!showAnnotate->isChecked()) {
-		findAnnotate->setEnabled(false);
-		goPrev->setEnabled(false);
-		goNext->setEnabled(false);
-	}
-	if (highlight->isChecked())
-		rangeFilter->setEnabled(false);
+    if( rangeFilter->isChecked() )
+        highlight->setEnabled( false );
 
-	if (rangeFilter->isChecked())
-		highlight->setEnabled(false);
-
-	// special case: reset range filter when changing file
-	if (!annotateAvailable && rangeFilter->isChecked())
-		rangeFilter->toggle();
+    //
+    // Special case: reset range filter when changing file
+    //
+    if( !annotateAvailable && rangeFilter->isChecked() )
+    {
+        rangeFilter->toggle();
+    }
 }
 
-void FileView::on_toolButtonCopy_clicked() {
-
-	fileTab->textEditFile->copySelection();
+void
+FileView::on_toolButtonCopy_clicked()
+{
+    fileTab->textEditFile->copySelection();
 }
 
-void FileView::on_toolButtonShowAnnotate_toggled(bool b) {
+void
+FileView::on_toolButtonShowAnnotate_toggled( bool b )
+{
+    updateEnabledButtons();
+    fileTab->textEditFile->setShowAnnotate( b );
 
-	updateEnabledButtons();
-	fileTab->textEditFile->setShowAnnotate(b);
-
-	if (b && fileTab->toolButtonFindAnnotate->isChecked())
-		goToCurrentAnnotation();
+    if( b && fileTab->toolButtonFindAnnotate->isChecked() )
+    {
+        goToCurrentAnnotation();
+    }
 }
 
-void FileView::on_toolButtonFindAnnotate_toggled(bool b) {
-
-	updateEnabledButtons();
-	if (b)
-		goToCurrentAnnotation();
+void
+FileView::on_toolButtonFindAnnotate_toggled( bool b )
+{
+    updateEnabledButtons();
+    if( b )
+        goToCurrentAnnotation();
 }
 
-void FileView::on_toolButtonGoNext_clicked() {
-
-	goToCurrentAnnotation(1);
+void
+FileView::on_toolButtonGoNext_clicked()
+{
+    goToCurrentAnnotation( 1 );
 }
 
-void FileView::on_toolButtonGoPrev_clicked() {
-
-	goToCurrentAnnotation(-1);
+void
+FileView::on_toolButtonGoPrev_clicked()
+{
+    goToCurrentAnnotation( -1 );
 }
 
-void FileView::on_toolButtonPin_toggled(bool b) {
-// button is enabled and togglable only if st.sha() is found
+void
+FileView::on_toolButtonPin_toggled( bool b )
+{
+    // Button is enabled and togglable only if st.sha() is found
+    fileTab->spinBoxRevision->setDisabled( b );
 
-	fileTab->spinBoxRevision->setDisabled(b);
-
-	if (!b) {
-		updateSpinBoxValue(); // UPDATE() call is filtered in this case
-		fileTab->textEditFile->doUpdate(true);
-	}
+    if( !b )
+    {
+        // UPDATE() call is filtered in this case
+        updateSpinBoxValue();
+        fileTab->textEditFile->doUpdate( true );
+    }
 }
 
-void FileView::on_toolButtonRangeFilter_toggled(bool b) {
+void
+FileView::on_toolButtonRangeFilter_toggled( bool b )
+{
+    updateEnabledButtons();
 
-	updateEnabledButtons();
-	if (b) {
-		if (!fileTab->textEditFile->isAnnotateAvailable()) {
-			dbs("ASSERT in on_toolButtonRangeFilter_toggled: annotate not available");
-			return;
-		}
-		if (!fileTab->textEditFile->textCursor().hasSelection()) {
-			showStatusBarMessage("Please select some text");
-			return;
-		}
-	}
-	bool rangeFilterActive = fileTab->textEditFile->rangeFilter(b);
-	filterOnRange(rangeFilterActive);
+    if( b )
+    {
+        if( !fileTab->textEditFile->isAnnotateAvailable() )
+        {
+            dbs( "ASSERT in on_toolButtonRangeFilter_toggled: annotate not available" );
+            return;
+        }
+        if( !fileTab->textEditFile->textCursor().hasSelection() )
+        {
+            showStatusBarMessage( "Please select some text" );
+            return;
+        }
+    }
+
+    bool rangeFilterActive = fileTab->textEditFile->rangeFilter( b );
+    filterOnRange( rangeFilterActive );
 }
 
-void FileView::on_toolButtonHighlightText_toggled(bool b) {
-
-	updateEnabledButtons();
-	fileTab->textEditFile->setHighlightSource(b);
+void
+FileView::on_toolButtonHighlightText_toggled( bool b )
+{
+    updateEnabledButtons();
+    fileTab->textEditFile->setHighlightSource( b );
 }
 
-void FileView::on_spinBoxRevision_valueChanged(int id) {
-
-	if (id != fileTab->spinBoxRevision->minimum()) {
-
-		SCRef selRev(fileTab->histListView->shaFromAnnId(id));
-		if (st.sha() != selRev) { // to avoid looping
-			st.setSha(selRev);
-			st.setSelectItem(true);
-			UPDATE();
-		}
-	}
+void
+FileView::on_spinBoxRevision_valueChanged( int id )
+{
+    if( id != fileTab->spinBoxRevision->minimum() )
+    {
+        SCRef selRev( fileTab->histListView->shaFromAnnId( id ) );
+        if( st.sha() != selRev )
+        {
+            //
+            // To avoid looping
+            //
+            st.setSha( selRev );
+            st.setSelectItem( true );
+            UPDATE();
+        }
+    }
 }
 
-void FileView::on_loadCompleted(const FileHistory* f, const QString& msg) {
+void
+FileView::on_loadCompleted( const FileHistory* f, const QString& msg )
+{
+    QApplication::restoreOverrideCursor();
 
-	QApplication::restoreOverrideCursor();
+    if( f != model() )
+        return;
 
-	if (f != model())
-		return;
+    showStatusBarMessage( "" );
+    fileTab->histListView->showIdValues();
+    int maxId = model()->rowCount();
+    if( maxId == 0 )
+        return;
 
-	showStatusBarMessage("");
-	fileTab->histListView->showIdValues();
-	int maxId = model()->rowCount();
-	if (maxId == 0)
-		return;
+    fileTab->spinBoxRevision->setMaximum( maxId );
+    fileTab->toolButtonPin->setEnabled( true );
+    fileTab->spinBoxRevision->setEnabled( true );
 
-	fileTab->spinBoxRevision->setMaximum(maxId);
-	fileTab->toolButtonPin->setEnabled(true);
-	fileTab->spinBoxRevision->setEnabled(true);
+    //
+    // Update histListView now to avoid to miss following status bar messages
+    //
+    doUpdate( false );
 
-	// update histListView now to avoid to miss
-	// following status bar messages
-	doUpdate(false);
-
-	QString histTime = msg.section(" ms", 0, 0).section(" ", -1);
-	if (fileTab->textEditFile->startAnnotate(model(), histTime))
-		showStatusBarMessage("Annotating revisions of '" + st.fileName() + "'...");
+    QString histTime = msg.section( " ms", 0, 0 ).section( " ", -1 );
+    if( fileTab->textEditFile->startAnnotate( model(), histTime ) )
+    {
+        showStatusBarMessage( "Annotating revisions of '" + st.fileName() + "'..." );
+    }
 }
 
-void FileView::showAnnotation() {
+void
+FileView::showAnnotation()
+{
+    if( !fileTab->toolButtonPin->isChecked() && fileTab->toolButtonShowAnnotate->isEnabled() &&
+        fileTab->toolButtonShowAnnotate->isChecked() )
+    {
+        fileTab->textEditFile->setShowAnnotate( true );
 
-	if (  !fileTab->toolButtonPin->isChecked()
-	    && fileTab->toolButtonShowAnnotate->isEnabled()
-	    && fileTab->toolButtonShowAnnotate->isChecked()) {
-
-		fileTab->textEditFile->setShowAnnotate(true);
-
-		if (   fileTab->toolButtonFindAnnotate->isEnabled()
-		    && fileTab->toolButtonFindAnnotate->isChecked())
-
-			goToCurrentAnnotation();
-	}
+        if( fileTab->toolButtonFindAnnotate->isEnabled() &&
+            fileTab->toolButtonFindAnnotate->isChecked() )
+        {
+            goToCurrentAnnotation();
+        }
+    }
 }
 
-void FileView::on_annotationAvailable(bool b) {
+void
+FileView::on_annotationAvailable( bool b )
+{
+    updateEnabledButtons();
 
-	updateEnabledButtons();
-	if (b)
-		showAnnotation(); // in case annotation got ready after file
+    //
+    // In case annotation got ready after file
+    //
+    if( b )
+        showAnnotation();
 }
 
-void FileView::on_fileAvailable(bool b) {
+void
+FileView::on_fileAvailable( bool b )
+{
+    updateEnabledButtons();
+    if( b )
+    {
+        //
+        // Code range is independent from annotation
+        //
+        if( fileTab->toolButtonRangeFilter->isChecked() )
+        {
+            fileTab->textEditFile->goToRangeStart();
+        }
 
-	updateEnabledButtons();
-	if (b) {
-		// code range is independent from annotation
-		if (fileTab->toolButtonRangeFilter->isChecked())
-			fileTab->textEditFile->goToRangeStart();
-
-		showAnnotation(); // in case file got ready after annotation
-	}
+        //
+        // In case file got ready after annotation
+        //
+        showAnnotation();
+    }
 }
 
-void FileView::on_revIdSelected(int id) {
+void
+FileView::on_revIdSelected( int id )
+{
+    if( id == 0 )
+        return;
 
-	if (id == 0)
-		return;
-
-	if (fileTab->spinBoxRevision->isEnabled())
-		fileTab->spinBoxRevision->setValue(id);
-	else {
-		ListView* h = fileTab->histListView;
-		int row = h->model()->rowCount() - id;
-		QModelIndex idx = h->model()->index(row, 0);
-		h->setCurrentIndex(idx);
-	}
+    if( fileTab->spinBoxRevision->isEnabled() )
+    {
+        fileTab->spinBoxRevision->setValue( id );
+    }
+    else
+    {
+        ListView* h = fileTab->histListView;
+        int row = h->model()->rowCount() - id;
+        QModelIndex idx = h->model()->index( row, 0 );
+        h->setCurrentIndex( idx );
+    }
 }

@@ -1,54 +1,57 @@
 /*
-	Author: Marco Costalba (C) 2005-2007
+    Author: Marco Costalba (C) 2005-2007
 
-	Copyright: See COPYING file that comes with this distribution
+    Copyright: See COPYING file that comes with this distribution
 
 */
 #ifndef COMMITIMPL_H
 #define COMMITIMPL_H
 
-#include "ui_commit.h"
 #include "common.h"
+#include "ui_commit.h"
 
 class Git;
 
-class CommitImpl : public QWidget, public Ui_CommitBase {
-Q_OBJECT
-public:
-	explicit CommitImpl(Git* g, bool amend);
+class CommitImpl : public QWidget, public Ui_CommitBase
+{
+    Q_OBJECT
 
-signals:
-	void changesCommitted(bool);
+    Git* git;
+    QString origMsg;
+    int ofsX, ofsY;
 
-public slots:
-	virtual void closeEvent(QCloseEvent*);
-	void pushButtonCommit_clicked();
-	void pushButtonAmend_clicked();
-	void pushButtonCancel_clicked();
-	void pushButtonUpdateCache_clicked();
-	void pushButtonSettings_clicked();
-	void textEditMsg_cursorPositionChanged();
-
-private slots:
-	void contextMenuPopup(const QPoint&);
-	void checkAll();
-	void unCheckAll();
+    static QString lastMsgBeforeError;
 
 private:
-	void checkUncheck(bool checkAll);
-	bool getFiles(SList selFiles);
-	void warnNoFiles();
-	bool checkFiles(SList selFiles);
-	bool checkMsg(QString& msg);
-	bool checkPatchName(QString& patchName);
-	bool checkConfirm(SCRef msg, SCRef patchName, SCList selFiles, bool amend);
-	void computePosition(int &col_pos, int &line_pos);
+    virtual void closeEvent( QCloseEvent* );
 
-	Git* git;
-	QString origMsg;
-	int ofsX, ofsY;
+    void checkUncheck( bool checkAll );
+    bool getFiles( SList selFiles );
+    void warnNoFiles();
+    bool checkFiles( SList selFiles );
+    bool checkMsg( QString& msg );
+    bool checkPatchName( QString& patchName );
+    bool checkConfirm( SCRef msg, SCRef patchName, SCList selFiles, bool amend );
+    void computePosition( int& col_pos, int& line_pos );
 
-	static QString lastMsgBeforeError;
+private slots:
+    void contextMenuPopup( const QPoint& );
+    void checkAll();
+    void unCheckAll();
+
+public:
+    explicit CommitImpl( Git* g, bool amend );
+
+signals:
+    void changesCommitted( bool );
+
+public slots:
+    void pushButtonCommit_clicked();
+    void pushButtonAmend_clicked();
+    void pushButtonCancel_clicked();
+    void pushButtonUpdateCache_clicked();
+    void pushButtonSettings_clicked();
+    void textEditMsg_cursorPositionChanged();
 };
 
 #endif
