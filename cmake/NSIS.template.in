@@ -1,0 +1,121 @@
+!include ..\..\..\NSIS.definitions.nsh
+!include "MUI2.nsh"
+!include "FileFunc.nsh"
+
+Name "@CPACK_PACKAGE_NAME@"
+BrandingText "@CPACK_PACKAGE_NAME@-@CPACK_PACKAGE_VERSION_MAJOR@"
+OutFile "@CPACK_TOPLEVEL_DIRECTORY@/@CPACK_OUTPUT_FILE_NAME@"
+SetCompressor /SOLID lzma
+InstallDir "$PROGRAMFILES\QGit"
+!define INST_DIR "@CPACK_TEMPORARY_DIRECTORY@"
+
+!define MUI_ABORTWARNING
+; !define MUI_WELCOMEFINISHPAGE_BITMAP "${NSIS_SOURCE_PATH}\cmake\leftimage.bmp"
+; !define MUI_UNWELCOMEFINISHPAGE_BITMAP "${NSIS_SOURCE_PATH}\cmake\leftimage.bmp"
+; !define MUI_HEADERIMAGE
+; !define MUI_HEADERIMAGE_BITMAP "${NSIS_SOURCE_PATH}\cmake\headerimage.bmp"
+; !define MUI_HEADERIMAGE_UNBITMAP "${NSIS_SOURCE_PATH}\cmake\headerimage.bmp"
+!define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the installation of QGit.$\r$\n$\r$\nClick Next to continue."
+; !define MUI_FINISHPAGE_RUN "$INSTDIR/oracle.exe"
+; !define MUI_FINISHPAGE_RUN_TEXT "Run 'Oracle' now to update your card database"
+; !define MUI_FINISHPAGE_RUN_PARAMETERS "-dlsets"
+
+!insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "${NSIS_SOURCE_PATH}\LICENSE"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_COMPONENTS
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
+
+!insertmacro MUI_LANGUAGE "English"
+
+Section "Application" SecApplication
+	SetShellVarContext all
+	SetOutPath "$INSTDIR"
+
+    @CPACK_NSIS_EXTRA_PREINSTALL_COMMANDS@
+    @CPACK_NSIS_FULL_INSTALL@
+
+	WriteUninstaller "$INSTDIR\uninstall.exe"
+	${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
+	IntFmt $0 "0x%08X" $0
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "DisplayName" "QGit"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "InstallLocation" "$INSTDIR"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "DisplayIcon" "$INSTDIR\qgit.exe"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "EstimatedSize" "$0"
+SectionEnd
+
+;Section "Update configuration" SecUpdateConfig
+;	SetShellVarContext current
+;	WriteRegStr HKCU "Software\QGit\paths" "carddatabase" "$LOCALAPPDATA\Cockatrice\cards.xml"
+;	WriteRegStr HKCU "Software\QGit\paths" "tokendatabase" "$LOCALAPPDATA\Cockatrice\tokens.xml"
+;	WriteRegStr HKCU "Software\QGit\paths" "decks" "$LOCALAPPDATA\Cockatrice\decks"
+;	WriteRegStr HKCU "Software\QGit\paths" "pics" "$LOCALAPPDATA\Cockatrice\pics"
+;	WriteRegStr HKCU "Software\QGit\replays" "pics" "$LOCALAPPDATA\Cockatrice\replays"
+;	WriteRegStr HKCU "Software\QGit\sound" "path" "$INSTDIR\sounds"
+;SectionEnd
+
+Section "Start menu item" SecStartMenu
+	SetShellVarContext all
+	createDirectory "$SMPROGRAMS\QGit"
+	createShortCut "$SMPROGRAMS\QGit\QGit.lnk" "$INSTDIR\qgit.exe"
+;	createShortCut "$SMPROGRAMS\QGit\UserManual.lnk" "$INSTDIR\Usermanual.pdf"
+SectionEnd
+
+Section "un.Application" UnSecApplication
+	SetShellVarContext all
+;	RMDir /r "$INSTDIR\translations"
+	Delete "$INSTDIR\uninstall.exe"
+	Delete "$INSTDIR\qgit.exe"
+;	Delete "$INSTDIR\UserManual.pdf"
+	Delete "$INSTDIR\Qt*.dll"
+	Delete "$INSTDIR\icu*.dll"
+	Delete "$INSTDIR\libeay32.dll"
+	Delete "$INSTDIR\ssleay32.dll"
+	Delete "$INSTDIR\qt.conf"
+	Delete "$INSTDIR\qdebug.txt"
+	Delete "$INSTDIR\zlib1.dll"
+	RMDir "$INSTDIR"
+
+	RMDir "$SMPROGRAMS\QGit"
+
+	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\QGit"
+SectionEnd
+
+LangString DESC_SecApplication ${LANG_ENGLISH} "QGit program files"
+LangString DESC_SecUpdateConfig ${LANG_ENGLISH} "Update the paths in the application settings according to the installation paths."
+LangString DESC_SecStartMenu ${LANG_ENGLISH} "Create start menu items for QGit."
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecApplication} $(DESC_SecApplication)
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecUpdateConfig} $(DESC_SecUpdateConfig)
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecStartMenu} $(DESC_SecStartMenu)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+LangString DESC_UnSecApplication ${LANG_ENGLISH} "QGit program files and start menu items"
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT ${UnSecApplication} $(DESC_UnSecApplication)
+!insertmacro MUI_UNFUNCTION_DESCRIPTION_END
+
+
+Function .onInit
+    SetShellVarContext all
+    ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\QGit" "UninstallString"
+    StrCmp $R0 "" done
+
+    MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "A previous version of QGit must be uninstalled before installing the new one." IDOK uninst
+    Abort
+
+uninst:
+    ClearErrors
+    ExecWait "$R0"
+
+done:
+
+FunctionEnd
