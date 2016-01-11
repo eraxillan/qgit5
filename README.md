@@ -4,21 +4,25 @@ With **QGit** you will be able to browse revisions history, view patch content
 and changed files, graphically following different development branches.
 Bugs or feature requests for **git** itself should be sent to the git@vger.kernel.org mailing list.
 For **QGit** - to http://libre.tibirna.org/projects/qgit/issues.
----
+
+
+----------
+
+
 ### Main features
  - View revisions, diffs, files history, files annotation, archive tree
  - Commit changes visually cherry picking modified files
  - Apply or save patch series from selected commits, drag and drop commits between two instances of **QGit**
- - Associate commands sequences, scripts and anything else executable
-   to a custom action.
-   Actions can be run from menu and corresponding
-   output is grabbed by a terminal window.
-
- - **QGit** implements a **GUI** for the most common StGIT commands like push/pop
-   and apply/save patches.
+ - Associate commands sequences, scripts and anything else executable to a custom action.
+   Actions can be run from menu and corresponding output is grabbed by a terminal window.
+ - **QGit** implements a **GUI** for the most common StGIT commands like push/pop and apply/save patches.
    You can also create new patches or refresh current top one using the same semantics of git commit,
    i.e. cherry picking single modified files.
----
+
+
+----------
+
+
 ### Installation
 
 You need **Qt** developer libraries, version *4.8.0* or later or version *5.0.3* or later, already installed.
@@ -28,23 +32,24 @@ Be sure compiler, qmake and Qt bin tools are in **PATH** environment variable.
 in case also Qt3 version is in path the former must be explicitly invoked.
 
 To compile, install and start **QGit**:
+
  - unpack the released tar file or clone from a git public archive
  - (Windows only) open *src/src.pro* and set the proper **GIT_EXEC_DIR** value
  - generate Makefiles (only the first time)
-   Unix/Linux and Windows:
-    ``` sh
-    qmake qgit.pro
-    ```
-   Mac OS X:
-   ```sh
-   qmake -spec macx-g++ qgit.pro
-   ```
+   - Unix/Linux and Windows:
+```sh
+      qmake qgit.pro
+```
+   - Mac OS X:
+```sh
+      qmake -spec macx-g++ qgit.pro
+```
  - (Windows with Visual Studio only) open *qgit.sln* solution file
  - do standart installation procedure:
- - ``` sh
+``` sh
    make
    make install
-   ```
+```
  - (Windows only) run *start_qgit.bat* to start the application.
     You can also create a a desktop icon linked to `start_qgit.bat` and double
     click on it.
@@ -58,7 +63,11 @@ or `src/src.pro` files or in case of "strange" compile errors.
 
 Remember to manually delete all Makefile* files in `src/` directory
 before to start `qmake qgit.pro`.
----
+
+
+----------
+
+
 ### Performance tweaks
 
 A `git log` command is used to load the repository at startup or when refreshing.
@@ -73,8 +82,7 @@ define in `src/dataloader.h` before to compile.
 
 ### Command line arguments
 
-Run `qgit` from a `git` working directory, command line arguments
-are filtered by `git log`.
+Run `qgit` from a `git` working directory, command line arguments are filtered by `git log`.
 Some examples:
 
 	qgit --no-merges
@@ -108,9 +116,14 @@ Reference names and any associated messages can be viewed in status
 bar when a tagged revision is selected.
 When you right click on main view a context sensitive pop-up menu is shows
 available commands and a `quick jump` tag list.
----
-**Key bindings**:
-|                 |                                |
+
+
+----------
+
+
+### Key bindings
+
+|        Key      |                 Action         |
 | --------------- | ------------------------------ |
 | `r`             | Go to revisions list page      |
 | `p`             | Go to patch page               |
@@ -134,7 +147,10 @@ available commands and a `quick jump` tag list.
 | `<Space>`       | Scroll content down one page |
 | `u`             | Scroll content up 18 lines |
 | `d`             | Scroll content down 18 lines |
--------------------------------------------------
+
+
+----------
+
 
 ### Directory tree
 From menu or toolbar button it is possible to show a side panel with
@@ -146,7 +162,8 @@ button it is possible to compress revision list to show only selected
 files/directories in tree view.
 
 Tree view supports multi-selection.
-When you right click on a file on tree view a context sensitive pop-up menu is shows with available commands.
+When you right click on a file on tree view a context sensitive pop-up menu
+is shows with available commands.
 
 ### Working directory changes
 When `Check working dir` flag is set, as example from main view context pop-up menu,
