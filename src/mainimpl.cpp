@@ -2155,7 +2155,7 @@ MainImpl::ActAbout_activated()
         "Copyright (c) 2011 Jean-François Dagenais &lt;dagenaisj@sonatest.com&gt;<br>"
         "Copyright (c) 2011 Pavel Tikhomirov &lt;pavtih@gmail.com&gt;<br>"
         "Copyright (c) 2011 Cristian Tibirna &lt;tibirna@kde.org&gt;<br>"
-        "Copyright (c) 2011 Tim Blechmann &lt;tim@klingt.org&gt;"
+        "Copyright (c) 2011 Tim Blechmann &lt;tim@klingt.org&gt;<br>"
         "Copyright (c) 2015-2016 Alexander Kamyshnikov &lt;axill777@gmail.com&gt;"
         "</p>"
 
