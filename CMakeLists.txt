@@ -55,7 +55,7 @@ if( UNIX )
         # Mac OS X
         # Due to the special bundle structure ignore the prefix eventually set by the user
         #
-        set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/release )
+        set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/dist )
     else()
         #
         # Linux / BSD
@@ -72,7 +72,7 @@ if( UNIX )
         endif()
     endif()
 elseif( WIN32 )
-    set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/release )
+    set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/dist )
 endif()
 
 #
@@ -219,6 +219,42 @@ elseif( WIN32 )
         ${CMAKE_MODULE_PATH}/NSIS.definitions.nsh.in
         ${PROJECT_BINARY_DIR}/NSIS.definitions.nsh
     )
+endif()
+
+#
+# Configuration of Inno Setup files
+# FIXME: only Visual Studio compiler is currently supported
+#
+if( WIN32 AND MSVC)
+    find_program( ISS_COMPILER NAMES iscc ISCC
+                  HINTS "C:/Program Files (x86)/Inno Setup 5" "C:/Program Files/Inno Setup 5" )
+
+    if( NOT ISS_COMPILER )
+        message( WARNING "Inno Setup Compiler not found. You won't be able to build setup files" )
+    else()
+        message( STATUS "Using Inno Setup Compiler from: ${ISS_COMPILER}" )
+        file( COPY        "${CMAKE_CURRENT_SOURCE_DIR}/qgit_inno_setup.iss"
+              DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/" )
+
+        #
+        # FIX: convert slash to backslash to make path Inno Setup-readable
+        #
+        string( REGEX REPLACE "/" "\\\\" CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR} )        
+        #
+        # Parse Inno Setup config file
+        #
+        configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/qgit_inno_setup.iss"
+                        "${CMAKE_CURRENT_BINARY_DIR}/qgit_inno_setup.iss" )
+
+        #
+        # Add installer target
+        #
+        add_custom_target( innosetup_installer
+                           COMMAND ${CMAKE_MAKE_PROGRAM} INSTALL.vcxproj /t:Build /p:Configuration=Release
+                           COMMAND ${ISS_COMPILER} "${CMAKE_CURRENT_BINARY_DIR}/qgit_inno_setup.iss"
+                           VERBATIM )
+        string( REGEX REPLACE "\\\\" "/" CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR} )
+    endif()
 endif()
 
 include(CPack)
@@ -450,6 +486,15 @@ if( UNIX )
 #        install( FILES ${qgit_QM} DESTINATION share/qgit/translations )
     endif()
 elseif( WIN32 )
+        #include( InstallRequiredSystemLibraries )
+        #install( FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ./ COMPONENT Libraries)
+        
+        set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE )
+        include( InstallRequiredSystemLibraries )
+        install( PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+                 DESTINATION ./
+                 COMPONENT applications )
+        
         install( TARGETS qgit RUNTIME DESTINATION ./ )
         install( FILES ${qgit_QM} DESTINATION ./translations )
 endif()

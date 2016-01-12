@@ -1,31 +1,41 @@
+;
 ; QGit installation script for Inno Setup compiler
 ;
-; QGit should be compiled with MSVC 2008, statically linked
-; to Qt4.3 or better Trolltech libraries and directory of
-; Visual C++ redistributable dll files copied under 'bin\'
-; directory
+; QGit should be compiled with MSVC 2013 and dynamically linked to Qt 4.8.0 or Qt 5.0.3
+;
 
 [Setup]
 AppName=QGit
-AppVerName=QGit version 2.3
+AppVerName=QGit version 2.6
 DefaultDirName={pf}\QGit
 DefaultGroupName=QGit
 UninstallDisplayIcon={app}\qgit.exe
 Compression=lzma
 SolidCompression=yes
-LicenseFile=COPYING.rtf
-SetupIconFile=src\resources\qgit.ico
-OutputDir=bin
-OutputBaseFilename=qgit-2.3_win
+LicenseFile=${CMAKE_CURRENT_SOURCE_DIR}\COPYING.rtf
+SetupIconFile=${CMAKE_CURRENT_SOURCE_DIR}\src\resources\qgit.ico
+OutputDir=dist
+OutputBaseFilename=qgit-2.6_win
 
 [Files]
-Source: "bin\qgit.exe"; DestDir: "{app}"
-Source: "bin\qgit.exe.manifest"; DestDir: "{app}"
-Source: "README_WIN.txt"; DestDir: "{app}"; Flags: isreadme
-
-; Directory of MSVC redistributable files must be copied under 'bin\'
-; before to run Inno Setup compiler or following line will error out
-Source: "bin\Microsoft.VC90.CRT\*"; DestDir: "{app}\Microsoft.VC90.CRT"
+; QGit binaries
+Source: "dist\qgit.exe"; DestDir: "{app}"
+; MSVC runtime libraries
+Source: "dist\msvcp120.dll"; DestDir: "{app}"
+Source: "dist\msvcr120.dll"; DestDir: "{app}"
+; Qt5 configuration file
+Source: "dist\qt.conf"; DestDir: "{app}"
+; Qt5 libraries
+Source: "dist\Qt5Core.dll"; DestDir: "{app}"
+Source: "dist\Qt5Gui.dll"; DestDir: "{app}"
+Source: "dist\Qt5Widgets.dll"; DestDir: "{app}"
+; Qt5 plugins
+Source: "dist\Plugins\platforms\qminimal.dll";   DestDir: "{app}\Plugins\platforms"
+Source: "dist\Plugins\platforms\qoffscreen.dll"; DestDir: "{app}\Plugins\platforms"
+Source: "dist\Plugins\platforms\qwindows.dll";   DestDir: "{app}\Plugins\platforms"
+; Documentation
+Source: "${CMAKE_CURRENT_SOURCE_DIR}\README_WIN.txt"; DestDir: "{app}"; Flags: isreadme
+Source: "${CMAKE_CURRENT_SOURCE_DIR}\COPYING.rtf"; DestDir: "{app}";
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon";
@@ -81,7 +91,7 @@ var
   BaseDir: String;
 
 begin
-  // Validate pages before allowing the user to proceed }
+  // Validate pages before allowing the user to proceed
   if CurPageID = MSysGitDirPage.ID then begin
 
       BaseDir := MSysGitDirPage.Values[0];
