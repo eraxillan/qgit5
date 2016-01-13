@@ -72,7 +72,7 @@ if( UNIX )
         endif()
     endif()
 elseif( WIN32 )
-    set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/dist )
+    set( CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/Release )
 endif()
 
 #
@@ -173,8 +173,17 @@ else()
     endif()
 endif()
 
+set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
+set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )
 #set( CMAKE_AUTOUIC TRUE )
+
+#
+# Supress Qt debug output in release version
+#
+if( CMAKE_BUILD_TYPE STREQUAL "Release" )
+    add_definitions( -DQT_NO_DEBUG_OUTPUT )
+endif()
 
 #
 # Package builder
@@ -223,7 +232,7 @@ endif()
 
 #
 # Configuration of Inno Setup files
-# FIXME: only Visual Studio compiler is currently supported
+# FIXME: only Visual Studio 2013 compiler is currently supported
 #
 if( WIN32 AND MSVC)
     find_program( ISS_COMPILER NAMES iscc ISCC
@@ -247,10 +256,11 @@ if( WIN32 AND MSVC)
                         "${CMAKE_CURRENT_BINARY_DIR}/qgit_inno_setup.iss" )
 
         #
-        # Add installer target
+        # Add Inno Setup installer target
         #
         add_custom_target( innosetup_installer
-                           COMMAND ${CMAKE_MAKE_PROGRAM} INSTALL.vcxproj /t:Build /p:Configuration=Release
+                           COMMAND ${CMAKE_MAKE_PROGRAM} INSTALL.vcxproj     /t:Build /p:Configuration=Release
+                           COMMAND ${CMAKE_MAKE_PROGRAM} windeployqt.vcxproj /t:Build /p:Configuration=Release
                            COMMAND ${ISS_COMPILER} "${CMAKE_CURRENT_BINARY_DIR}/qgit_inno_setup.iss"
                            VERBATIM )
         string( REGEX REPLACE "\\\\" "/" CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR} )
@@ -485,18 +495,21 @@ if( UNIX )
 #        install( FILES ${CMAKE_CURRENT_SOURCE_DIR}/qgit.desktop DESTINATION ${DESKTOPDIR} )
 #        install( FILES ${qgit_QM} DESTINATION share/qgit/translations )
     endif()
-elseif( WIN32 )
-        #include( InstallRequiredSystemLibraries )
-        #install( FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ./ COMPONENT Libraries)
-        
+elseif( WIN32 )        
         set( CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE )
         include( InstallRequiredSystemLibraries )
         install( PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
                  DESTINATION ./
                  COMPONENT applications )
-        
+                         
         install( TARGETS qgit RUNTIME DESTINATION ./ )
-        install( FILES ${qgit_QM} DESTINATION ./translations )
+        if( WIN32 AND NOT CMAKE_CROSSCOMPILING )
+            include( WinDeployQt )
+            WinDeployQt( TARGET qgit INCLUDE_MODULES ${QGIT_LIBS} EXCLUDE_MODULES webkit webkit2 )
+        endif()
+        
+        # FIXME: implement
+#        install( FILES ${qgit_QM} DESTINATION ./translations )
 endif()
 
 if( APPLE )
@@ -533,38 +546,4 @@ Data = Resources\")
         include(BundleUtilities)
         fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/qgit.app\" \"\${QTPLUGINS}\" \"${QT_LIBRARY_DIR}\")
         " COMPONENT Runtime)
-endif()
-
-if( WIN32 )
-    #
-    # These needs to be relative to CMAKE_INSTALL_PREFIX
-    #
-    set( plugin_dest_dir Plugins )
-    set( qtconf_dest_dir . )
-    
-    #
-    # FIXME: replace this ugly manual copying with windeployqt.exe call, using neovim-qt CMakeLists.txt
-    #
-    
-    #
-    # Qt4: iconengines, imageformats
-    # Qt5: iconengines, imageformats, platforms, printsupport
-    #
-    install( DIRECTORY "${QT_PLUGINS_DIR}/" DESTINATION ${plugin_dest_dir} COMPONENT Runtime
-        FILES_MATCHING REGEX "(iconengines|imageformats|platforms|printsupport)/.*[^d]\\.dll" )
-
-    install( CODE "
-        file(WRITE \"\${CMAKE_INSTALL_PREFIX}/${qtconf_dest_dir}/qt.conf\" \"[Paths]
-Plugins = Plugins
-Translations = Resources/translations
-Data = Resources\")
-    " COMPONENT Runtime)
-
-    install( CODE "
-        file(GLOB_RECURSE QTPLUGINS
-            \"\${CMAKE_INSTALL_PREFIX}/${plugin_dest_dir}/*.dll\")
-        set(BU_CHMOD_BUNDLE_ITEMS ON)
-        include(BundleUtilities)
-        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/qgit.exe\" \"\${QTPLUGINS}\" \"${QT_LIBRARY_DIR}\")
-        " COMPONENT Runtime )
 endif()

@@ -14,25 +14,21 @@ Compression=lzma
 SolidCompression=yes
 LicenseFile=${CMAKE_CURRENT_SOURCE_DIR}\COPYING.rtf
 SetupIconFile=${CMAKE_CURRENT_SOURCE_DIR}\src\resources\qgit.ico
-OutputDir=dist
+OutputDir=Release
 OutputBaseFilename=qgit-2.6_win
 
 [Files]
 ; QGit binaries
-Source: "dist\qgit.exe"; DestDir: "{app}"
+Source: "Release\qgit.exe"; DestDir: "{app}"
 ; MSVC runtime libraries
-Source: "dist\msvcp120.dll"; DestDir: "{app}"
-Source: "dist\msvcr120.dll"; DestDir: "{app}"
-; Qt5 configuration file
-Source: "dist\qt.conf"; DestDir: "{app}"
+Source: "Release\msvcp120.dll"; DestDir: "{app}"
+Source: "Release\msvcr120.dll"; DestDir: "{app}"
 ; Qt5 libraries
-Source: "dist\Qt5Core.dll"; DestDir: "{app}"
-Source: "dist\Qt5Gui.dll"; DestDir: "{app}"
-Source: "dist\Qt5Widgets.dll"; DestDir: "{app}"
+Source: "Release\Qt5Core.dll"; DestDir: "{app}"
+Source: "Release\Qt5Gui.dll"; DestDir: "{app}"
+Source: "Release\Qt5Widgets.dll"; DestDir: "{app}"
 ; Qt5 plugins
-Source: "dist\Plugins\platforms\qminimal.dll";   DestDir: "{app}\Plugins\platforms"
-Source: "dist\Plugins\platforms\qoffscreen.dll"; DestDir: "{app}\Plugins\platforms"
-Source: "dist\Plugins\platforms\qwindows.dll";   DestDir: "{app}\Plugins\platforms"
+Source: "Release\platforms\qwindows.dll";   DestDir: "{app}\platforms"
 ; Documentation
 Source: "${CMAKE_CURRENT_SOURCE_DIR}\README_WIN.txt"; DestDir: "{app}"; Flags: isreadme
 Source: "${CMAKE_CURRENT_SOURCE_DIR}\COPYING.rtf"; DestDir: "{app}";
